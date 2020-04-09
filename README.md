@@ -1,4 +1,10 @@
 # vs-compat-ts-plugin
+
+[![Node version](https://img.shields.io/node/v/vs-compat-ts-plugin.svg?style=flat)](http://nodejs.org/download/)
+[![Known Vulnerabilities](https://snyk.io/test/github/andyrooger/vs-compat-ts-plugin/badge.svg?targetFile=package.json)](https://snyk.io/test/github/andyrooger/vs-compat-ts-plugin?targetFile=package.json)
+[![Dependencies](https://david-dm.org/andyrooger/vs-compat-ts-plugin.svg)](https://david-dm.org/andyrooger/vs-compat-ts-plugin)
+[![Dev Dependencies](https://david-dm.org/andyrooger/vs-compat-ts-plugin/dev-status.svg)](https://david-dm.org/andyrooger/vs-compat-ts-plugin/?type=dev)
+
 TypeScript language service plugin to let more plugins work in Visual Studio.
 
 Many language service plugins work perfectly in VS Code, but using them in Visual Studio will break due to various niggles. Ideally these would all be fixed by the plugin maintainers but this plugin can be used as a temporary measure until then.
