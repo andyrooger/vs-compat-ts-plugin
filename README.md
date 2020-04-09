@@ -44,3 +44,7 @@ Relative to the tsconfig. Null means do not set a working directory.
 By default `require('typescript')` will pick up the locally installed version of typescript. Plugins are supposed to use the version provided by the language service which will likely be different. Self contained plugins are typically fine, but those using other modules such as tslint or eslint often use require and can break if the two versions differ.
 
 Turn this on to mock `require('typescript')` to point to the version running in the TS language service from the IDE.
+
+## License
+
+MIT
