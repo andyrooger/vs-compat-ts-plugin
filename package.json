@@ -1,0 +1,28 @@
+{
+  "name": "vs-compat-ts-plugin",
+  "version": "0.1.0",
+  "description": "TypeScript language service plugin to let more plugins work in Visual Studio.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andyrooger/vs-compat-ts-plugin.git"
+  },
+  "keywords": [
+    "typescript",
+    "ts",
+    "visual",
+    "studio",
+    "vs",
+    "language",
+    "service"
+  ],
+  "author": "andyrooger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andyrooger/vs-compat-ts-plugin/issues"
+  },
+  "homepage": "https://github.com/andyrooger/vs-compat-ts-plugin#readme"
+}
