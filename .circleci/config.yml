@@ -37,8 +37,8 @@ workflows:
       jobs:
         - test-linux
         - test-windows
-        - release
-          requires:
-            - test-linux
-            - test-windows
+        - release:
+            requires:
+              - test-linux
+              - test-windows
       
