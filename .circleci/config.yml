@@ -8,10 +8,8 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: npm run junit
+      - node/install-packages
+      - run: npm run junit
       - store_test_results:
           path: test/results
 
@@ -20,10 +18,8 @@ jobs:
       name: win/default
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: npm run junit
+      - node/install-packages
+      - run: npm run junit
       - store_test_results:
           path: test/results
 workflows:
