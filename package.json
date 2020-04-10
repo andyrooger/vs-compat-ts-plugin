@@ -28,9 +28,19 @@
   },
   "homepage": "https://github.com/andyrooger/vs-compat-ts-plugin#readme",
   "devDependencies": {
+    "@semantic-release/changelog": "^5.0.1",
     "semantic-release": "^17.0.4",
     "tap-junit": "^3.1.2",
     "tape": "^4.13.2",
     "typescript": "^3.8.3"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ]
   }
 }
