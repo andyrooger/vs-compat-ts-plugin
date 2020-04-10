@@ -22,8 +22,23 @@ jobs:
       - run: npm run junit
       - store_test_results:
           path: test/results
+  
+  release:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - run: npm ci
+      - run: npm run semantic-release
+      
+
 workflows:
-    test:
+    test-and-release:
       jobs:
         - test-linux
         - test-windows
+        - release
+          requires:
+            - test-linux
+            - test-windows
+      
