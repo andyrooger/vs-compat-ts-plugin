@@ -1,15 +1,16 @@
 {
   "name": "vs-compat-ts-plugin",
-  "version": "0.1.0",
+  "version": "0.0.0-development",
   "description": "TypeScript language service plugin to let more plugins work in Visual Studio.",
   "main": "index.js",
   "scripts": {
     "test": "tape test/*.spec.js",
-    "junit": "npm test | tap-junit --output test/results/tap --name tape.xml"
+    "junit": "npm test | tap-junit --output test/results/tap --name tape.xml",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andyrooger/vs-compat-ts-plugin.git"
+    "url": "https://github.com/andyrooger/vs-compat-ts-plugin.git"
   },
   "keywords": [
     "typescript",
@@ -27,6 +28,7 @@
   },
   "homepage": "https://github.com/andyrooger/vs-compat-ts-plugin#readme",
   "devDependencies": {
+    "semantic-release": "^17.0.4",
     "tap-junit": "^3.1.2",
     "tape": "^4.13.2",
     "typescript": "^3.8.3"
