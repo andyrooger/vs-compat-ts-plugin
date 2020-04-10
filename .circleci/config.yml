@@ -8,7 +8,7 @@ jobs:
       name: node/default
     steps:
       - checkout
-      - node/install-packages
+      - run: npm ci
       - run: npm run junit
       - store_test_results:
           path: test/results
@@ -18,7 +18,7 @@ jobs:
       name: win/default
     steps:
       - checkout
-      - node/install-packages
+      - run: npm ci
       - run: npm run junit
       - store_test_results:
           path: test/results
