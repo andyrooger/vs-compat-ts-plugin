@@ -24,8 +24,7 @@ Enable the plugin in your tsconfig.json file
     "plugins": [
       {
         "name": "vs-compat-ts-plugin",
-        "workingDirectory": ".",
-        "useVSTypescript": true
+        "workingDirectory": "."
       },
       { "name": "other-plugin" },
       ...
@@ -40,17 +39,11 @@ Always make sure this is the first plugin in the list, as it effects how other p
 
 ## Configuration
 
-### workingDirectory (string - default null)
+**workingDirectory (string - default null)**
 
 This can set the working directory for the rest of the plugins. In many editors this seems to default to the workspace, but in Visual Studio it tends to be System32.
 
 Relative to the tsconfig. Null means do not set a working directory.
-
-### useVSTypescript (bool - default false)
-
-By default `require('typescript')` will pick up the locally installed version of typescript. Plugins are supposed to use the version provided by the language service which will likely be different. Self contained plugins are typically fine, but those using other modules such as tslint or eslint often use require and can break if the two versions differ.
-
-Turn this on to mock `require('typescript')` to point to the version running in the TS language service from the IDE.
 
 ## License
 
