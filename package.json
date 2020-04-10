@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "TypeScript language service plugin to let more plugins work in Visual Studio.",
   "main": "index.js",
+  "files": [],
   "scripts": {
     "test": "tape test/*.spec.js",
     "junit": "npm test | tap-junit --output test/results/tap --name tape.xml",
