@@ -11,7 +11,9 @@ jobs:
       - node/with-cache:
           steps:
             - run: npm install
-            - run: npm test
+            - run: npm run junit
+      - store_test_results:
+          path: test/results
 
   test-windows:
     executor:
@@ -21,7 +23,9 @@ jobs:
       - node/with-cache:
           steps:
             - run: npm install
-            - run: npm test
+            - run: npm run junit
+      - store_test_results:
+          path: test/results
 workflows:
     test:
       jobs:
