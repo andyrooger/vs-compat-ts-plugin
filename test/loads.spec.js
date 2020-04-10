@@ -1,14 +1,17 @@
 const path = require('path');
 const tape = require('tape');
-const { loadAndRunPlugins } = require('./tempProject');
+const { setupTemp, cleanupTemp, loadAndRunPlugins } = require('./tempProject');
 
+const thisPlugin = path.resolve(__dirname, '../index.js');
 
 tape('loads successfully', t => {
-    const plugins = [{
-        name: path.resolve(__dirname, '../index.js')
-    }];
-    loadAndRunPlugins(plugins, __dirname).then((logContent) => {
-        t.match(logContent, /\[vs-compat-ts-plugin\] loaded/)
+    setupTemp();
+    const plugins = [
+        { name: thisPlugin }
+    ];
+    loadAndRunPlugins(plugins, __dirname).then(({ messagesBy }) => {
+        t.ok(messagesBy('vs-compat-ts-plugin').indexOf('Loaded plugin') !== -1);
+        cleanupTemp();
         t.end();
     });
 });

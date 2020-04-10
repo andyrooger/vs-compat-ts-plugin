@@ -6,7 +6,7 @@ function init(modules) {
 
     function create(info) {
         const log = msg => info.project.projectService.logger.info(`[${PLUGIN_NAME}] ${msg}`);
-        log('loaded');
+        log('Loaded plugin');
 
         return info.languageService;
     }
