@@ -1,6 +1,5 @@
 # vs-compat-ts-plugin
 
-[![Node version](https://img.shields.io/node/v/vs-compat-ts-plugin.svg?style=flat)](http://nodejs.org/download/)
 [![Known Vulnerabilities](https://snyk.io/test/github/andyrooger/vs-compat-ts-plugin/badge.svg?targetFile=package.json)](https://snyk.io/test/github/andyrooger/vs-compat-ts-plugin?targetFile=package.json)
 [![Build](https://circleci.com/gh/andyrooger/vs-compat-ts-plugin.svg?style=shield)](https://circleci.com/gh/andyrooger/vs-compat-ts-plugin)
 [![Dependencies](https://david-dm.org/andyrooger/vs-compat-ts-plugin.svg)](https://david-dm.org/andyrooger/vs-compat-ts-plugin)
