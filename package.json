@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "tape test/*.spec.js",
-    "junit": "npm test | tap-junit --output test/results --name tape.xml"
+    "junit": "npm test | tap-junit --output test/results/tap --name tape.xml"
   },
   "repository": {
     "type": "git",
