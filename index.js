@@ -1,13 +1,18 @@
 'use strict';
 
+const path = require('path');
+
 const PLUGIN_NAME = 'vs-compat-ts-plugin';
 
 function init(modules) {
 
-    function setCwd(cwd, log) {
+    function setCwd(tsconfigFile, cwd, log) {
         if(cwd) {
-            process.chdir(cwd);
-            log(`Updating cwd to ${cwd}`)
+            const tsPath = path.dirname(tsconfigFile);
+            const fullCwd = path.resolve(tsPath, cwd);
+
+            log(`Updating cwd to ${fullCwd}`)
+            process.chdir(fullCwd);
         }
     }
 
@@ -15,7 +20,15 @@ function init(modules) {
         const log = msg => info.project.projectService.logger.info(`[${PLUGIN_NAME}] ${msg}`);
         log('Loaded plugin');
 
-        setCwd(info.config.workingDirectory, log);
+        try {
+            setCwd(info.project.projectName, info.config.workingDirectory, log);
+        }
+        catch(err) {
+            log('Could not set workingDirectory');
+            log(err);
+        }
+
+        log('Meddling completed')
 
         return info.languageService;
     }

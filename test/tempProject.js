@@ -7,6 +7,7 @@ const tempDir = path.resolve(__dirname, '.tempProject');
 function setupTemp() {
     cleanupTemp();
     fs.mkdirSync(tempDir);
+    return tempDir;
 }
 
 function cleanupTemp() {
@@ -52,4 +53,26 @@ function loadAndRunPlugins(plugins, serverCwd) {
     });
 }
 
-module.exports = { setupTemp, cleanupTemp, createTempProject, loadTempFile, loadAndRunPlugins };
+let pluginNum = 1;
+function createTempPlugin(pluginName, execute) {
+    const pluginFileName = path.resolve(tempDir, `plugin.${pluginName}.${pluginNum++}.js`);
+
+    function fakePlugin(modules) {
+    
+        function create(info) {
+            const log = msg => info.project.projectService.logger.info(`[${pluginName}] ${msg}`);
+    
+            execute(log);
+
+            return info.languageService;
+        }
+        return { create };
+    }
+
+    const pluginContent = `const execute = (${execute.toString()}); const pluginName = '${pluginName}'; ${fakePlugin.toString()}; module.exports = fakePlugin;`
+    fs.writeFileSync(pluginFileName, pluginContent);
+
+    return pluginFileName;
+}
+
+module.exports = { setupTemp, cleanupTemp, createTempProject, loadTempFile, loadAndRunPlugins, createTempPlugin };
