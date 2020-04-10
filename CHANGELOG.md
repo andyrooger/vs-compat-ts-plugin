@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v1.0.0...v1.0.1) (2020-04-10)
+
+
+### Performance Improvements
+
+* **release:** smaller package size ([e77fac0](https://github.com/andyrooger/vs-compat-ts-plugin/commit/e77fac0859d7da2bae35853d2788ed8bb00bbffa)), closes [#8](https://github.com/andyrooger/vs-compat-ts-plugin/issues/8)
+
 # 1.0.0 (2020-04-10)
 
 
