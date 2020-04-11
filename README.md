@@ -9,7 +9,7 @@ TypeScript language service plugin to let more plugins work in Visual Studio.
 
 Many language service plugins work perfectly in VS Code, but using them in Visual Studio will break due to various niggles. Ideally these would all be fixed without hacks like this but this plugin can be used as a temporary measure until then.
 
-Installation
+## Installation
 
 ```shell
 npm install --save-dev vs-compat-ts-plugin
