@@ -1,3 +1,17 @@
+# [2.0.0](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v1.1.2...v2.0.0) (2020-04-11)
+
+
+### Features
+
+* **defaults:** on by default ([32841f0](https://github.com/andyrooger/vs-compat-ts-plugin/commit/32841f0c1fe5c3dc9703253c63b17c9ccdd8eee6)), closes [#11](https://github.com/andyrooger/vs-compat-ts-plugin/issues/11)
+* **defaults:** onByDefault option ([ca2795c](https://github.com/andyrooger/vs-compat-ts-plugin/commit/ca2795cc17a86a35aa7b6699c8499bc0fc182401)), closes [#11](https://github.com/andyrooger/vs-compat-ts-plugin/issues/11)
+
+
+### BREAKING CHANGES
+
+* **defaults:** All options are now turned on by default. If you want an option turned off you can
+do this explicitly per option.
+
 ## [1.1.2](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v1.1.1...v1.1.2) (2020-04-11)
 
 
