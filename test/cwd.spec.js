@@ -19,8 +19,8 @@ tape('cwd is set before the next plugin init', t => {
         { name: thisPlugin, workingDirectory: pluginCwd },
         { name: testPlugin }
     ];
-    loadAndRunPlugins(plugins, serverCwd).then(({ messagesBy }) => {
-        t.equal(messagesBy(testPluginName)[0], pluginCwd);
+    loadAndRunPlugins(plugins, serverCwd).then(({ hasMessageBy }) => {
+        t.ok(hasMessageBy(testPluginName, pluginCwd));
         cleanupTemp();
         t.end();
     });
@@ -38,8 +38,8 @@ tape('cwd is set before the next plugin is loaded', t => {
         { name: thisPlugin, workingDirectory: pluginCwd },
         { name: testPlugin }
     ];
-    loadAndRunPlugins(plugins, serverCwd).then(({ messagesBy }) => {
-        t.equal(messagesBy(testPluginName)[0], pluginCwd);
+    loadAndRunPlugins(plugins, serverCwd).then(({ hasMessageBy }) => {
+        t.ok(hasMessageBy(testPluginName, pluginCwd));
         cleanupTemp();
         t.end();
     });
@@ -56,8 +56,8 @@ tape('cwd not changed when not provided', t => {
         { name: thisPlugin },
         { name: testPlugin }
     ];
-    loadAndRunPlugins(plugins, serverCwd).then(({ messagesBy }) => {
-        t.equal(messagesBy(testPluginName)[0], serverCwd);
+    loadAndRunPlugins(plugins, serverCwd).then(({ hasMessageBy }) => {
+        t.ok(hasMessageBy(testPluginName, serverCwd));
         cleanupTemp();
         t.end();
     });
@@ -74,8 +74,8 @@ tape('cwd not changed when null', t => {
         { name: thisPlugin, workingDirectory: null },
         { name: testPlugin }
     ];
-    loadAndRunPlugins(plugins, serverCwd).then(({ messagesBy }) => {
-        t.equal(messagesBy(testPluginName)[0], serverCwd);
+    loadAndRunPlugins(plugins, serverCwd).then(({ hasMessageBy }) => {
+        t.ok(hasMessageBy(testPluginName, serverCwd));
         cleanupTemp();
         t.end();
     });
@@ -92,16 +92,16 @@ tape('invalid cwd does not break everything else', t => {
         { name: thisPlugin, workingDirectory: '/\\not.*valid' },
         { name: testPlugin }
     ];
-    loadAndRunPlugins(plugins, serverCwd).then(({ messagesBy }) => {
-        t.equal(messagesBy(thisPluginName)[2], 'Could not set working directory');
-        t.equal(messagesBy(thisPluginName)[4], 'Meddling completed');
-        t.equal(messagesBy(testPluginName)[0], serverCwd);
+    loadAndRunPlugins(plugins, serverCwd).then(({ hasMessageBy }) => {
+        t.ok(hasMessageBy(thisPluginName, 'Could not set working directory'));
+        t.ok(hasMessageBy(thisPluginName, 'Meddling completed'));
+        t.ok(hasMessageBy(testPluginName, serverCwd));
         cleanupTemp();
         t.end();
     });
 });
 
-tape('cwd relative to the working directory', t => {
+tape('cwd relative to the tsconfig directory', t => {
     const serverCwd = path.resolve(__dirname, '..');
     const pluginCwd = path.join('.', 'workingDir');
 
@@ -115,8 +115,8 @@ tape('cwd relative to the working directory', t => {
         { name: thisPlugin, workingDirectory: pluginCwd },
         { name: testPlugin }
     ];
-    loadAndRunPlugins(plugins, serverCwd).then(({ messagesBy }) => {
-        t.equal(messagesBy(testPluginName)[0], fullPluginCwd);
+    loadAndRunPlugins(plugins, serverCwd).then(({ hasMessageBy }) => {
+        t.ok(hasMessageBy(testPluginName, fullPluginCwd));
         cleanupTemp();
         t.end();
     });
@@ -136,8 +136,8 @@ tape('cwd can use forward slashes (in all OS)', t => {
         { name: thisPlugin, workingDirectory: pluginCwd },
         { name: testPlugin }
     ];
-    loadAndRunPlugins(plugins, serverCwd).then(({ messagesBy }) => {
-        t.equal(messagesBy(testPluginName)[0], fullPluginCwd);
+    loadAndRunPlugins(plugins, serverCwd).then(({ hasMessageBy }) => {
+        t.ok(hasMessageBy(testPluginName, fullPluginCwd));
         cleanupTemp();
         t.end();
     });
