@@ -6,9 +6,17 @@ const mockRequire = require('mock-require');
 const PLUGIN_NAME = 'vs-compat-ts-plugin';
 
 function applyDefaults(config) {
-    return {
+    let defaults = config.onByDefault === false ? {
+        onByDefault: false,
+        workingDirectory: null,
+        useVSTypescript: false,
+    } : {
+        onByDefault: true,
         workingDirectory: '.',
         useVSTypescript: true,
+    };
+    return {
+        ...defaults,
         ...config
     };
 }
