@@ -24,7 +24,7 @@ function init(modules) {
             setCwd(info.project.projectName, info.config.workingDirectory, log);
         }
         catch(err) {
-            log('Could not set workingDirectory');
+            log('Could not set working directory');
             log(err);
         }
 
