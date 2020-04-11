@@ -45,24 +45,6 @@ tape('cwd is set before the next plugin is loaded', t => {
     });
 });
 
-tape('cwd not changed when not provided', t => {
-    const serverCwd = path.resolve(__dirname, '..');
-
-    setupTemp();
-    const testPlugin = createTempPlugin(testPluginName, log => {
-        log(process.cwd());
-    });
-    const plugins = [
-        { name: thisPlugin },
-        { name: testPlugin }
-    ];
-    loadAndRunPlugins(plugins, serverCwd).then(({ hasMessageBy }) => {
-        t.ok(hasMessageBy(testPluginName, serverCwd));
-        cleanupTemp();
-        t.end();
-    });
-});
-
 tape('cwd not changed when null', t => {
     const serverCwd = path.resolve(__dirname, '..');
 
