@@ -5,8 +5,9 @@ const path = require('path');
 const readline = require('readline');
 
 class TestServer {
-    constructor({ cwd, logFile }) {
-        const tsserverPath = path.join(__dirname, '..', 'node_modules', 'typescript', 'lib', 'tsserver');
+    constructor({ cwd, logFile, tsServerDir }) {
+        tsServerDir = tsServerDir || path.join(__dirname, '..');
+        const tsserverPath = path.join(tsServerDir, 'node_modules', 'typescript', 'lib', 'tsserver');
         const server = fork(tsserverPath, [
             '--pluginProbeLocations', path.join(__dirname, '..'),
             '--logFile', logFile,

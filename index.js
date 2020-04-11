@@ -1,6 +1,7 @@
 'use strict';
 
 const path = require('path');
+const mockRequire = require('mock-require');
 
 const PLUGIN_NAME = 'vs-compat-ts-plugin';
 
@@ -16,6 +17,13 @@ function init(modules) {
         }
     }
 
+    function replaceTypescript(useVSTypescript, vsTypescript, log) {
+        if(useVSTypescript) {
+            log('Mocking typescript module with the version from tsserver');
+            mockRequire('typescript', vsTypescript);
+        }
+    }
+
     function create(info) {
         const log = msg => info.project.projectService.logger.info(`[${PLUGIN_NAME}] ${msg}`);
         log('Loaded plugin');
@@ -25,6 +33,14 @@ function init(modules) {
         }
         catch(err) {
             log('Could not set working directory');
+            log(err);
+        }
+
+        try {
+            replaceTypescript(info.config.useVSTypescript, modules.typescript, log);
+        }
+        catch(err) {
+            log('Could not mock typescript');
             log(err);
         }
 

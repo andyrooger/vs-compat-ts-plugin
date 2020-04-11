@@ -33,10 +33,10 @@ function loadTempFile(server, fileName, fileContent) {
     server.send({ command: 'open', arguments: { file: tsFileName, fileContent: fileContent, scriptKindName: 'TS' } }, false);
 }
 
-function loadAndRunPlugins(plugins, serverCwd) {
+function loadAndRunPlugins(plugins, serverCwd, tsServerDir) {
     createTempProject(plugins);
     const logFile = path.resolve(tempDir, 'logFile.log');
-    const server = createTestServer({ cwd: serverCwd, logFile });
+    const server = createTestServer({ cwd: serverCwd, logFile, tsServerDir });
     loadTempFile(server, 'file.ts', '// nothing exciting');
 
     return server.processAndExit().then(() => {
@@ -62,7 +62,7 @@ function createTempPlugin(pluginName, execute, header = '') {
         function create(info) {
             const log = msg => info.project.projectService.logger.info(`[${pluginName}] ${msg}`);
     
-            execute(log);
+            execute(log, modules.typescript);
 
             return info.languageService;
         }
