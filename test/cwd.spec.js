@@ -7,7 +7,7 @@ const thisPlugin = path.resolve(__dirname, '../index.js');
 const thisPluginName = 'vs-compat-ts-plugin';
 const testPluginName = 'test-plugin';
 
-tape('cwd is set before the next plugin is run', t => {
+tape('cwd is set before the next plugin init', t => {
     const serverCwd = path.resolve(__dirname, '..');
     const pluginCwd = path.resolve(__dirname, '..', '..');
 
@@ -20,7 +20,26 @@ tape('cwd is set before the next plugin is run', t => {
         { name: testPlugin }
     ];
     loadAndRunPlugins(plugins, serverCwd).then(({ messagesBy }) => {
-        t.ok(messagesBy(testPluginName).indexOf(pluginCwd) !== -1);
+        t.equal(messagesBy(testPluginName)[0], pluginCwd);
+        cleanupTemp();
+        t.end();
+    });
+});
+
+tape('cwd is set before the next plugin is loaded', t => {
+    const serverCwd = path.resolve(__dirname, '..');
+    const pluginCwd = path.resolve(__dirname, '..', '..');
+
+    setupTemp();
+    const testPlugin = createTempPlugin(testPluginName, log => {
+        log(topCwd);
+    }, 'const topCwd = process.cwd();');
+    const plugins = [
+        { name: thisPlugin, workingDirectory: pluginCwd },
+        { name: testPlugin }
+    ];
+    loadAndRunPlugins(plugins, serverCwd).then(({ messagesBy }) => {
+        t.equal(messagesBy(testPluginName)[0], pluginCwd);
         cleanupTemp();
         t.end();
     });
@@ -38,7 +57,7 @@ tape('cwd not changed when not provided', t => {
         { name: testPlugin }
     ];
     loadAndRunPlugins(plugins, serverCwd).then(({ messagesBy }) => {
-        t.ok(messagesBy(testPluginName).indexOf(serverCwd) !== -1);
+        t.equal(messagesBy(testPluginName)[0], serverCwd);
         cleanupTemp();
         t.end();
     });
@@ -56,8 +75,9 @@ tape('invalid cwd does not break everything else', t => {
         { name: testPlugin }
     ];
     loadAndRunPlugins(plugins, serverCwd).then(({ messagesBy }) => {
-        t.ok(messagesBy(thisPluginName).indexOf('Meddling completed') !== -1);
-        t.ok(messagesBy(testPluginName).indexOf(serverCwd) !== -1);
+        t.equal(messagesBy(thisPluginName)[2], 'Could not set working directory');
+        t.equal(messagesBy(thisPluginName)[4], 'Meddling completed');
+        t.equal(messagesBy(testPluginName)[0], serverCwd);
         cleanupTemp();
         t.end();
     });
@@ -78,7 +98,7 @@ tape('cwd relative to the working directory', t => {
         { name: testPlugin }
     ];
     loadAndRunPlugins(plugins, serverCwd).then(({ messagesBy }) => {
-        t.ok(messagesBy(testPluginName).indexOf(fullPluginCwd) !== -1);
+        t.equal(messagesBy(testPluginName)[0], fullPluginCwd);
         cleanupTemp();
         t.end();
     });
@@ -99,7 +119,7 @@ tape('cwd can use forward slashes (in all OS)', t => {
         { name: testPlugin }
     ];
     loadAndRunPlugins(plugins, serverCwd).then(({ messagesBy }) => {
-        t.ok(messagesBy(testPluginName).indexOf(fullPluginCwd) !== -1);
+        t.equal(messagesBy(testPluginName)[0], fullPluginCwd);
         cleanupTemp();
         t.end();
     });

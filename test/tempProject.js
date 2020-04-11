@@ -54,7 +54,7 @@ function loadAndRunPlugins(plugins, serverCwd) {
 }
 
 let pluginNum = 1;
-function createTempPlugin(pluginName, execute) {
+function createTempPlugin(pluginName, execute, header = '') {
     const pluginFileName = path.resolve(tempDir, `plugin.${pluginName}.${pluginNum++}.js`);
 
     function fakePlugin(modules) {
@@ -69,7 +69,7 @@ function createTempPlugin(pluginName, execute) {
         return { create };
     }
 
-    const pluginContent = `const execute = (${execute.toString()}); const pluginName = '${pluginName}'; ${fakePlugin.toString()}; module.exports = fakePlugin;`
+    const pluginContent = `${header}\nconst execute = (${execute.toString()});\nconst pluginName = '${pluginName}';\n${fakePlugin.toString()};\nmodule.exports = fakePlugin;`
     fs.writeFileSync(pluginFileName, pluginContent);
 
     return pluginFileName;
