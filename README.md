@@ -39,13 +39,13 @@ Always make sure this is the first plugin in the list, as it effects how other p
 
 ## Configuration
 
-**workingDirectory (string - default null)**
+**workingDirectory (string or null - default '.')**
 
 This can set the working directory for the rest of the plugins. In many editors this seems to default to the workspace, but in Visual Studio it tends to be System32.
 
 Relative to the tsconfig. Null means do not set a working directory.
 
-**useVSTypescript (bool - default false)**
+**useVSTypescript (bool - default true)**
 
 Language service plugins should be using the version of typescript that's passed to them by tsserver. Tools they use, such as linters, tend to use the standard `require('typescript')` to pick up typescript.
 When tsserver is running from local npm depencencies, this is fine and both typescripts will be the same module. In Visual Studio, tsserver runs from a separate installation and so these modules are likely to be different. The result is various difficult to diagnose errors in plugins.
