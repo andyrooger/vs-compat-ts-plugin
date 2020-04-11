@@ -1,6 +1,6 @@
 {
   "name": "vs-compat-ts-plugin",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "TypeScript language service plugin to let more plugins work in Visual Studio.",
   "main": "index.js",
   "files": [],
