@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v1.0.1...v1.1.0) (2020-04-11)
+
+
+### Features
+
+* **usevstypescript:** mock typescript ([0a64173](https://github.com/andyrooger/vs-compat-ts-plugin/commit/0a64173b8b9f805f9162305b2431ee5cab8cfda8)), closes [#4](https://github.com/andyrooger/vs-compat-ts-plugin/issues/4)
+
 ## [1.0.1](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v1.0.0...v1.0.1) (2020-04-10)
 
 
