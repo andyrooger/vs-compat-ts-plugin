@@ -21,10 +21,25 @@ Enable the plugin in your tsconfig.json file
 {
   "compilerOptions": {
     "plugins": [
+      { "name": "vs-compat-ts-plugin" },
+      { "name": "other-plugin" },
+      ...
+    ]
+  }
+}
+```
+
+or with configuration as
+
+```json
+{
+  "compilerOptions": {
+    "plugins": [
       {
         "name": "vs-compat-ts-plugin",
         "workingDirectory": ".",
-        "useVSTypescript": true
+        "useVSTypescript": true,
+        "onByDefault": true
       },
       { "name": "other-plugin" },
       ...
@@ -51,6 +66,10 @@ Language service plugins should be using the version of typescript that's passed
 When tsserver is running from local npm depencencies, this is fine and both typescripts will be the same module. In Visual Studio, tsserver runs from a separate installation and so these modules are likely to be different. The result is various difficult to diagnose errors in plugins.
 
 This option mocks `require('typescript')` so that tools pick up the same typescript version that tsserver is running from.
+
+**onByDefault (bool - default true)**
+
+By default, all options are enabled with sensible defaults. This means new features could be enabled in minor releases updates. These changes should not break functionality but since this whole plugin is a hack, there is a small risk. If you don't want this behaviour, turn this option off. You can then enable features individually.
 
 ## License
 
