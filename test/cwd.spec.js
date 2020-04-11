@@ -63,6 +63,24 @@ tape('cwd not changed when not provided', t => {
     });
 });
 
+tape('cwd not changed when null', t => {
+    const serverCwd = path.resolve(__dirname, '..');
+
+    setupTemp();
+    const testPlugin = createTempPlugin(testPluginName, log => {
+        log(process.cwd());
+    });
+    const plugins = [
+        { name: thisPlugin, workingDirectory: null },
+        { name: testPlugin }
+    ];
+    loadAndRunPlugins(plugins, serverCwd).then(({ messagesBy }) => {
+        t.equal(messagesBy(testPluginName)[0], serverCwd);
+        cleanupTemp();
+        t.end();
+    });
+});
+
 tape('invalid cwd does not break everything else', t => {
     const serverCwd = path.resolve(__dirname, '..');
 

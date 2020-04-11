@@ -64,6 +64,24 @@ tape('typescript is mocked if useVSTypescript is true', t => {
     });
 });
 
+tape('typescript not mocked by default', t => {
+    setupTemp();
+    const testPlugin = createTempPlugin(testPluginName, (log, tsFromserver) => {
+        const ts = require('typescript');
+        log(ts.version);
+        log(tsFromserver.version);
+    });
+    const plugins = [
+        { name: thisPlugin },
+        { name: testPlugin }
+    ];
+    loadAndRunPlugins(plugins, tsServerDir, tsServerDir).then(({ messagesBy }) => {
+        t.notEqual(messagesBy(testPluginName)[0], messagesBy(testPluginName)[1]);
+        cleanupTemp();
+        t.end();
+    });
+});
+
 tape('typescript is mocked even at the top level of other plugins if useVSTypescript is true', t => {
     setupTemp();
     const testPlugin = createTempPlugin(testPluginName, (log, tsFromserver) => {
