@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v1.1.0...v1.1.1) (2020-04-11)
+
+
+### Bug Fixes
+
+* **release:** npm authentication ([7ce4b45](https://github.com/andyrooger/vs-compat-ts-plugin/commit/7ce4b45dbfd3df6a6a3405e29bd20be75763b723))
+
 # [1.1.0](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v1.0.1...v1.1.0) (2020-04-11)
 
 
