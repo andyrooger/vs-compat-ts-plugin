@@ -49,8 +49,11 @@ function loadAndRunPlugins(plugins, serverCwd, tsServerDir) {
                 .filter(line => line.indexOf(`[${plugin}] `) !== -1)
                 .map(line => line.substr(line.indexOf(`[${plugin}] `) + plugin.length + 3));
         }
+        function hasMessageBy(plugin, msg) {
+            return messagesBy(plugin).indexOf(msg) !== -1;
+        }
 
-        return { logContent, messagesBy };
+        return { logContent, messagesBy, hasMessageBy };
     });
 }
 

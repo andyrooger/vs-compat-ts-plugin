@@ -113,10 +113,10 @@ tape('failed typescript mock does not break the plugin', t => {
         { name: thisPlugin, useVSTypescript: true },
         { name: testPlugin },
     ];
-    loadAndRunPlugins(plugins, tsServerDir, tsServerDir).then(({ messagesBy }) => {
-        t.equal(messagesBy(thisPluginName)[2], 'Could not mock typescript');
-        t.equal(messagesBy(thisPluginName)[4], 'Meddling completed');
-        t.equal(messagesBy(testPluginName)[0], 'still working');
+    loadAndRunPlugins(plugins, tsServerDir, tsServerDir).then(({ hasMessageBy }) => {
+        t.ok(hasMessageBy(thisPluginName, 'Could not mock typescript'));
+        t.ok(hasMessageBy(thisPluginName, 'Meddling completed'));
+        t.ok(hasMessageBy(testPluginName, 'still working'));
         cleanupTemp();
         t.end();
     });
