@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const rimraf = require('rimraf');
 const createTestServer = require('./TestServer');
 
 const tempDir = path.resolve(__dirname, '.tempProject');
@@ -11,7 +12,7 @@ function setupTemp() {
 }
 
 function cleanupTemp() {
-    fs.rmdirSync(tempDir, { recursive: true });
+    rimraf.sync(tempDir, { ignoreGlob: true });
 }
 
 function createTempProject(pluginsArray) {
