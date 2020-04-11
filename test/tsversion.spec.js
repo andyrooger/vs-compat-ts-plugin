@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const { execFile } = require('child_process');
+const rimraf = require('rimraf');
 const tape = require('tape');
 const { setupTemp, cleanupTemp, loadAndRunPlugins, createTempPlugin } = require('./tempProject');
 
@@ -10,7 +11,7 @@ const testPluginName = 'test-plugin';
 const tsServerDir = path.resolve(__dirname, 'different-ts');
 
 function killTempNodeModules() {
-    fs.rmdirSync(path.resolve(tsServerDir, 'node_modules'), { recursive: true });
+    rimraf.sync(path.resolve(tsServerDir, 'node_modules'), { disableGlob: true });
 }
 
 tape('install other TS version', t => {
