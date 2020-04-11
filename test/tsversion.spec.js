@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const { execFile } = require('child_process');
+const { exec } = require('child_process');
 const rimraf = require('rimraf');
 const tape = require('tape');
 const { setupTemp, cleanupTemp, loadAndRunPlugins, createTempPlugin } = require('./tempProject');
@@ -17,7 +17,7 @@ function killTempNodeModules() {
 tape('install other TS version', t => {
     killTempNodeModules();
 
-    execFile('npm', ['ci'], { cwd: tsServerDir }, (err, stdout, stderr) => {
+    exec('npm ci', { cwd: tsServerDir }, (err, stdout, stderr) => {
         t.error(err);
 
         const tsserverTsPackageContent = fs.readFileSync(path.resolve(tsServerDir, 'node_modules', 'typescript', 'package.json'));
