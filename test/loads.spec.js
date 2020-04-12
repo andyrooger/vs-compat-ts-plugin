@@ -9,7 +9,7 @@ tape('loads successfully', t => {
     const plugins = [
         { name: thisPlugin }
     ];
-    loadAndRunPlugins(plugins, __dirname).then(({ hasMessageBy }) => {
+    loadAndRunPlugins({ plugins }).then(({ hasMessageBy }) => {
         t.ok(hasMessageBy('vs-compat-ts-plugin', 'Loaded plugin'));
         cleanupTemp();
         t.end();

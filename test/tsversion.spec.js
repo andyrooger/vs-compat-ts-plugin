@@ -40,7 +40,7 @@ tape('typescript not mocked if useVSTypescript is false', t => {
         { name: thisPlugin, useVSTypescript: false },
         { name: testPlugin }
     ];
-    loadAndRunPlugins(plugins, tsServerDir, tsServerDir).then(({ messagesBy }) => {
+    loadAndRunPlugins({ plugins, serverCwd: tsServerDir, tsServerDir }).then(({ messagesBy }) => {
         t.notEqual(messagesBy(testPluginName)[0], messagesBy(testPluginName)[1]);
         cleanupTemp();
         t.end();
@@ -58,7 +58,7 @@ tape('typescript is mocked if useVSTypescript is true', t => {
         { name: thisPlugin, useVSTypescript: true },
         { name: testPlugin }
     ];
-    loadAndRunPlugins(plugins, tsServerDir, tsServerDir).then(({ messagesBy }) => {
+    loadAndRunPlugins({ plugins, serverCwd: tsServerDir, tsServerDir }).then(({ messagesBy }) => {
         t.equal(messagesBy(testPluginName)[0], messagesBy(testPluginName)[1]);
         cleanupTemp();
         t.end();
@@ -75,7 +75,7 @@ tape('typescript is mocked even at the top level of other plugins if useVSTypesc
         { name: thisPlugin, useVSTypescript: true },
         { name: testPlugin }
     ];
-    loadAndRunPlugins(plugins, tsServerDir, tsServerDir).then(({ messagesBy }) => {
+    loadAndRunPlugins({ plugins, serverCwd: tsServerDir, tsServerDir }).then(({ messagesBy }) => {
         t.equal(messagesBy(testPluginName)[0], messagesBy(testPluginName)[1]);
         cleanupTemp();
         t.end();
@@ -87,7 +87,7 @@ tape('failed typescript mock does not break the plugin', t => {
     const breakMockTsPlugin = createTempPlugin('break-mock', () => {
         require('mock-require')('mock-require', () => { throw new Error(); });
     });
-    const testPlugin = createTempPlugin(testPluginName, (log, tsFromserver) => {
+    const testPlugin = createTempPlugin(testPluginName, log => {
         log('still working');
     });
     const plugins = [
@@ -95,7 +95,7 @@ tape('failed typescript mock does not break the plugin', t => {
         { name: thisPlugin, useVSTypescript: true },
         { name: testPlugin },
     ];
-    loadAndRunPlugins(plugins, tsServerDir, tsServerDir).then(({ hasMessageBy }) => {
+    loadAndRunPlugins({ plugins, serverCwd: tsServerDir, tsServerDir }).then(({ hasMessageBy }) => {
         t.ok(hasMessageBy(thisPluginName, 'Could not mock typescript'));
         t.ok(hasMessageBy(thisPluginName, 'Meddling completed'));
         t.ok(hasMessageBy(testPluginName, 'still working'));
