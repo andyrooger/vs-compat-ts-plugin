@@ -13,7 +13,7 @@ class TestServer {
             '--logFile', logFile,
             '--logVerbosity', 'info',
         ], {
-                cwd: cwd,
+                cwd: cwd || __dirname,
                 stdio: ['pipe', 'pipe', 'pipe', 'ipc'],
             });
         this._exitPromise = new Promise((resolve, reject) => {

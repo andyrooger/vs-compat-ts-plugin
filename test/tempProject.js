@@ -34,7 +34,7 @@ function loadTempFile(server, fileName, fileContent) {
     server.send({ command: 'open', arguments: { file: tsFileName, fileContent: fileContent, scriptKindName: 'TS' } }, false);
 }
 
-function loadAndRunPlugins(plugins, serverCwd, tsServerDir) {
+function loadAndRunPlugins({ plugins, serverCwd, tsServerDir }) {
     createTempProject(plugins);
     const logFile = path.resolve(tempDir, 'logFile.log');
     const server = createTestServer({ cwd: serverCwd, logFile, tsServerDir });

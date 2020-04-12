@@ -19,7 +19,7 @@ tape('cwd is set before the next plugin init', t => {
         { name: thisPlugin, workingDirectory: pluginCwd },
         { name: testPlugin }
     ];
-    loadAndRunPlugins(plugins, serverCwd).then(({ hasMessageBy }) => {
+    loadAndRunPlugins({ plugins, serverCwd }).then(({ hasMessageBy }) => {
         t.ok(hasMessageBy(testPluginName, pluginCwd));
         cleanupTemp();
         t.end();
@@ -38,7 +38,7 @@ tape('cwd is set before the next plugin is loaded', t => {
         { name: thisPlugin, workingDirectory: pluginCwd },
         { name: testPlugin }
     ];
-    loadAndRunPlugins(plugins, serverCwd).then(({ hasMessageBy }) => {
+    loadAndRunPlugins({ plugins, serverCwd }).then(({ hasMessageBy }) => {
         t.ok(hasMessageBy(testPluginName, pluginCwd));
         cleanupTemp();
         t.end();
@@ -56,7 +56,7 @@ tape('cwd not changed when null', t => {
         { name: thisPlugin, workingDirectory: null },
         { name: testPlugin }
     ];
-    loadAndRunPlugins(plugins, serverCwd).then(({ hasMessageBy }) => {
+    loadAndRunPlugins({ plugins, serverCwd }).then(({ hasMessageBy }) => {
         t.ok(hasMessageBy(testPluginName, serverCwd));
         cleanupTemp();
         t.end();
@@ -74,7 +74,7 @@ tape('invalid cwd does not break everything else', t => {
         { name: thisPlugin, workingDirectory: '/\\not.*valid' },
         { name: testPlugin }
     ];
-    loadAndRunPlugins(plugins, serverCwd).then(({ hasMessageBy }) => {
+    loadAndRunPlugins({ plugins, serverCwd }).then(({ hasMessageBy }) => {
         t.ok(hasMessageBy(thisPluginName, 'Could not set working directory'));
         t.ok(hasMessageBy(thisPluginName, 'Meddling completed'));
         t.ok(hasMessageBy(testPluginName, serverCwd));
@@ -97,7 +97,7 @@ tape('cwd relative to the tsconfig directory', t => {
         { name: thisPlugin, workingDirectory: pluginCwd },
         { name: testPlugin }
     ];
-    loadAndRunPlugins(plugins, serverCwd).then(({ hasMessageBy }) => {
+    loadAndRunPlugins({ plugins, serverCwd }).then(({ hasMessageBy }) => {
         t.ok(hasMessageBy(testPluginName, fullPluginCwd));
         cleanupTemp();
         t.end();
@@ -118,7 +118,7 @@ tape('cwd can use forward slashes (in all OS)', t => {
         { name: thisPlugin, workingDirectory: pluginCwd },
         { name: testPlugin }
     ];
-    loadAndRunPlugins(plugins, serverCwd).then(({ hasMessageBy }) => {
+    loadAndRunPlugins({ plugins, serverCwd }).then(({ hasMessageBy }) => {
         t.ok(hasMessageBy(testPluginName, fullPluginCwd));
         cleanupTemp();
         t.end();
