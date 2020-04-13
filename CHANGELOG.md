@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v2.0.0...v2.1.0) (2020-04-13)
+
+
+### Features
+
+* **warnings:** tsconfig warnings ([3a4e65d](https://github.com/andyrooger/vs-compat-ts-plugin/commit/3a4e65d79155caa774944b9ab5b5864922db80f3)), closes [#5](https://github.com/andyrooger/vs-compat-ts-plugin/issues/5)
+
 # [2.0.0](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v1.1.2...v2.0.0) (2020-04-11)
 
 

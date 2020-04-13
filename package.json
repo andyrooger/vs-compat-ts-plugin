@@ -1,9 +1,11 @@
 {
   "name": "vs-compat-ts-plugin",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "TypeScript language service plugin to let more plugins work in Visual Studio.",
   "main": "index.js",
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "scripts": {
     "test": "tape test/*.spec.js",
     "junit": "npm test | tap-junit --output test/results/tap --name tape.xml",
