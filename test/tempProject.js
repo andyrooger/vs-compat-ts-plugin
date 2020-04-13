@@ -34,14 +34,16 @@ function loadTempFile(server, fileName, fileContent) {
     server.send({ command: 'open', arguments: { file: tsFileName, fileContent: fileContent, scriptKindName: 'TS' } }, false);
 }
 
-function loadAndRunPlugins({ plugins, serverCwd, tsServerDir }) {
+function loadAndRunPlugins({ plugins, serverCwd, tsServerDir, runServerCommands }) {
     createTempProject(plugins);
     const logFile = path.resolve(tempDir, 'logFile.log');
     const server = createTestServer({ cwd: serverCwd, logFile, tsServerDir });
     loadTempFile(server, 'file.ts', '// nothing exciting');
+    (runServerCommands || function(){})(server, 'file.ts', path.resolve(tempDir, 'tsconfig.json'));
 
     return server.processAndExit().then(() => {
         const logContent = fs.readFileSync(logFile).toString();
+        const responses = server.responses;
         function messagesBy(plugin) {
             return logContent
                 .split('\n')
@@ -53,7 +55,7 @@ function loadAndRunPlugins({ plugins, serverCwd, tsServerDir }) {
             return messagesBy(plugin).indexOf(msg) !== -1;
         }
 
-        return { logContent, messagesBy, hasMessageBy };
+        return { logContent, responses, messagesBy, hasMessageBy };
     });
 }
 

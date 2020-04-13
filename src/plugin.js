@@ -3,6 +3,7 @@
 const applyDefaults = require('./defaults');
 const setCwd = require('./cwd');
 const replaceTypescript = require('./tsversion');
+const addOrderWarning = require('./orderwarning');
 
 const PLUGIN_NAME = 'vs-compat-ts-plugin';
 
@@ -31,6 +32,8 @@ function init(modules) {
         }
 
         log('Meddling completed')
+
+        addOrderWarning(info.languageService, PLUGIN_NAME, modules.typescript, log);
 
         return info.languageService;
     }
