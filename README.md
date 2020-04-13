@@ -1,9 +1,11 @@
 # vs-compat-ts-plugin
 
+[![Node version](https://img.shields.io/node/v/vs-compat-ts-plugin)](https://www.npmjs.com/package/vs-compat-ts-plugin)
 [![Known Vulnerabilities](https://snyk.io/test/github/andyrooger/vs-compat-ts-plugin/badge.svg?targetFile=package.json)](https://snyk.io/test/github/andyrooger/vs-compat-ts-plugin?targetFile=package.json)
 [![Build](https://circleci.com/gh/andyrooger/vs-compat-ts-plugin.svg?style=shield)](https://circleci.com/gh/andyrooger/vs-compat-ts-plugin)
 [![Dependencies](https://david-dm.org/andyrooger/vs-compat-ts-plugin.svg)](https://david-dm.org/andyrooger/vs-compat-ts-plugin)
 [![Dev Dependencies](https://david-dm.org/andyrooger/vs-compat-ts-plugin/dev-status.svg)](https://david-dm.org/andyrooger/vs-compat-ts-plugin/?type=dev)
+[![License](https://img.shields.io/npm/l/vs-compat-ts-plugin)](https://github.com/andyrooger/vs-compat-ts-plugin/blob/master/LICENSE)
 
 TypeScript language service plugin to let more plugins work in Visual Studio.
 

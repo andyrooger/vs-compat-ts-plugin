@@ -6,6 +6,9 @@
   "files": [
     "src"
   ],
+  "engines": {
+    "node": ">=10.14"
+  },
   "scripts": {
     "test": "tape test/*.spec.js",
     "junit": "npm test | tap-junit --output test/results/tap --name tape.xml",
