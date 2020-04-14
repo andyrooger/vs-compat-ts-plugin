@@ -12,9 +12,11 @@ class TestServer {
             '--pluginProbeLocations', path.join(__dirname, '..'),
             '--logFile', logFile,
             '--logVerbosity', 'info',
+            '--disableAutomaticTypingAcquisition'
         ], {
                 cwd: cwd || __dirname,
                 stdio: ['pipe', 'pipe', 'pipe', 'ipc'],
+                env: { TSS_LOG: '' }
             });
         this._exitPromise = new Promise((resolve, reject) => {
             server.on('exit', code => resolve(code));
