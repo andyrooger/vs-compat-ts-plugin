@@ -2,10 +2,9 @@ const path = require('path');
 const fs = require('fs');
 const tape = require('tape');
 const { setupTemp, cleanupTemp, loadAndRunPlugins, pluginTest } = require('./tempProject');
-const { THIS_PLUGIN, LOG_CWD_PLUGIN, LOG_LOADTIME_CWD_PLUGIN } = require('./fixtures');
+const { THIS_PLUGIN, LOG_CWD_PLUGIN, LOG_LOADTIME_CWD_PLUGIN, EMPTY_DIRS } = require('./fixtures');
 
-const SERVER_CWD = path.resolve(__dirname, '..');
-const PLUGIN_CWD = path.resolve(__dirname, '..', '..');
+const [SERVER_CWD, PLUGIN_CWD] = EMPTY_DIRS;
 
 pluginTest('cwd is set before the next plugin init', {
     serverCwd: SERVER_CWD,

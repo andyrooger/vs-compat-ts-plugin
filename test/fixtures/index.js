@@ -24,5 +24,9 @@ module.exports = {
     TS_VERSIONS: { 
         '3.8': { version: '3.8.3', path: path.resolve(__dirname, '..', '..', 'node_modules', 'typescript38') },
         'default': { version: '3.7.5', path: path.resolve(__dirname, '..', '..', 'node_modules', 'typescript') }
-    }
+    },
+    EMPTY_DIRS: [
+        path.resolve(__dirname, 'dirs', 'dir1'),
+        path.resolve(__dirname, 'dirs', 'dir2')
+    ]
 };
