@@ -59,26 +59,4 @@ function loadAndRunPlugins({ plugins, serverCwd, tsServerDir, runServerCommands 
     });
 }
 
-let pluginNum = 1;
-function createTempPlugin(pluginName, execute, header = '') {
-    const pluginFileName = path.resolve(tempDir, `plugin.${pluginName}.${pluginNum++}.js`);
-
-    function fakePlugin(modules) {
-    
-        function create(info) {
-            const log = msg => info.project.projectService.logger.info(`[${pluginName}] ${msg}`);
-    
-            execute(log, modules.typescript);
-
-            return info.languageService;
-        }
-        return { create };
-    }
-
-    const pluginContent = `${header}\nconst execute = (${execute.toString()});\nconst pluginName = '${pluginName}';\n${fakePlugin.toString()};\nmodule.exports = fakePlugin;`
-    fs.writeFileSync(pluginFileName, pluginContent);
-
-    return pluginFileName;
-}
-
-module.exports = { setupTemp, cleanupTemp, createTempProject, loadTempFile, loadAndRunPlugins, createTempPlugin };
+module.exports = { setupTemp, cleanupTemp, createTempProject, loadTempFile, loadAndRunPlugins };
