@@ -1,16 +1,15 @@
 const path = require('path');
 const tape = require('tape');
 const { setupTemp, cleanupTemp, loadAndRunPlugins } = require('./tempProject');
-
-const thisPlugin = path.resolve(__dirname, '../index.js');
+const { THIS_PLUGIN } = require('./fixtures');
 
 tape('loads successfully', t => {
     setupTemp();
     const plugins = [
-        { name: thisPlugin }
+        { name: THIS_PLUGIN.path }
     ];
     loadAndRunPlugins({ plugins }).then(({ hasMessageBy }) => {
-        t.ok(hasMessageBy('vs-compat-ts-plugin', 'Loaded plugin'));
+        t.ok(hasMessageBy(THIS_PLUGIN.name, 'Loaded plugin'));
         cleanupTemp();
         t.end();
     });
