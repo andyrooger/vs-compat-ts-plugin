@@ -38,10 +38,10 @@ function loadTempFile(server, fileName, fileContent) {
     server.send({ command: 'open', arguments: { file: tsFileName, fileContent: fileContent, scriptKindName: 'TS', projectFileName: path.resolve(tempDir, 'tsconfig.json') } }, false);
 }
 
-function loadAndRunPlugins({ plugins, serverCwd, tsServerDir, runServerCommands }) {
+function loadAndRunPlugins({ plugins, serverCwd, tsServerDir, runServerCommands, typescriptServerDir }) {
     createTempProject(plugins);
     const logFile = path.resolve(tempDir, 'logFile.log');
-    const server = createTestServer({ cwd: serverCwd, logFile, tsServerDir });
+    const server = createTestServer({ cwd: serverCwd, logFile, tsServerDir, typescriptServerDir });
     loadTempFile(server, 'file.ts', '// nothing exciting');
     (runServerCommands || function(){})(server, 'file.ts', path.resolve(tempDir, 'tsconfig.json'));
 

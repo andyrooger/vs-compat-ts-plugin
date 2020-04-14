@@ -20,5 +20,9 @@ module.exports = {
     },
     BREAK_MOCK_REQUIRE_PLUGIN: {
         name: 'breakMockRequirePlugin', path: path.resolve(__dirname, 'plugins', 'breakMockRequirePlugin.js')
+    },
+    TS_VERSIONS: { 
+        '3.8': { version: '3.8.3', path: path.resolve(__dirname, '..', '..', 'node_modules', 'typescript38') },
+        'default': { version: '3.7.5', path: path.resolve(__dirname, '..', '..', 'node_modules', 'typescript') }
     }
 };

@@ -43,7 +43,8 @@
     "semantic-release": "^17.0.4",
     "tap-junit": "^3.1.2",
     "tape": "^4.13.2",
-    "typescript": "^3.8.3"
+    "typescript": "3.7.5",
+    "typescript38": "npm:typescript@3.8.3"
   },
   "release": {
     "plugins": [
