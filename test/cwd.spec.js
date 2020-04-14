@@ -1,71 +1,56 @@
 const path = require('path');
 const fs = require('fs');
 const tape = require('tape');
-const { setupTemp, cleanupTemp, loadAndRunPlugins } = require('./tempProject');
+const { setupTemp, cleanupTemp, loadAndRunPlugins, pluginTest } = require('./tempProject');
 const { THIS_PLUGIN, LOG_CWD_PLUGIN, LOG_LOADTIME_CWD_PLUGIN } = require('./fixtures');
 
-tape('cwd is set before the next plugin init', t => {
-    const serverCwd = path.resolve(__dirname, '..');
-    const pluginCwd = path.resolve(__dirname, '..', '..');
+const SERVER_CWD = path.resolve(__dirname, '..');
+const PLUGIN_CWD = path.resolve(__dirname, '..', '..');
 
-    setupTemp();
-    const plugins = [
-        { name: THIS_PLUGIN.path, workingDirectory: pluginCwd },
+pluginTest('cwd is set before the next plugin init', {
+    serverCwd: SERVER_CWD,
+    plugins: [
+        { name: THIS_PLUGIN.path, workingDirectory: PLUGIN_CWD },
         { name: LOG_CWD_PLUGIN.path }
-    ];
-    loadAndRunPlugins({ plugins, serverCwd }).then(({ hasMessageBy }) => {
-        t.ok(hasMessageBy(LOG_CWD_PLUGIN.name, pluginCwd));
-        cleanupTemp();
-        t.end();
-    });
+    ],
+    check: (t, { hasMessageBy }) => {
+        t.ok(hasMessageBy(LOG_CWD_PLUGIN.name, PLUGIN_CWD));
+    }
 });
 
-tape('cwd is set before the next plugin is loaded', t => {
-    const serverCwd = path.resolve(__dirname, '..');
-    const pluginCwd = path.resolve(__dirname, '..', '..');
-
-    setupTemp();
-    const plugins = [
-        { name: THIS_PLUGIN.path, workingDirectory: pluginCwd },
+pluginTest('cwd is set before the next plugin is loaded', {
+    serverCwd: SERVER_CWD,
+    plugins: [
+        { name: THIS_PLUGIN.path, workingDirectory: PLUGIN_CWD },
         { name: LOG_LOADTIME_CWD_PLUGIN.path }
-    ];
-    loadAndRunPlugins({ plugins, serverCwd }).then(({ hasMessageBy }) => {
-        t.ok(hasMessageBy(LOG_LOADTIME_CWD_PLUGIN.name, pluginCwd));
-        cleanupTemp();
-        t.end();
-    });
+    ],
+    check: (t, { hasMessageBy }) => {
+        t.ok(hasMessageBy(LOG_LOADTIME_CWD_PLUGIN.name, PLUGIN_CWD));
+    }
 });
 
-tape('cwd not changed when null', t => {
-    const serverCwd = path.resolve(__dirname, '..');
-
-    setupTemp();
-    const plugins = [
+pluginTest('cwd not changed when null', {
+    serverCwd: SERVER_CWD,
+    plugins: [
         { name: THIS_PLUGIN.path, workingDirectory: null },
         { name: LOG_CWD_PLUGIN.path }
-    ];
-    loadAndRunPlugins({ plugins, serverCwd }).then(({ hasMessageBy }) => {
-        t.ok(hasMessageBy(LOG_CWD_PLUGIN.name, serverCwd));
-        cleanupTemp();
-        t.end();
-    });
+    ],
+    check: (t, { hasMessageBy }) => {
+        t.ok(hasMessageBy(LOG_CWD_PLUGIN.name, SERVER_CWD));
+    }
 });
 
-tape('invalid cwd does not break everything else', t => {
-    const serverCwd = path.resolve(__dirname, '..');
-
-    setupTemp();
-    const plugins = [
+pluginTest('invalid cwd does not break everything else', {
+    serverCwd: SERVER_CWD,
+    plugins: [
         { name: THIS_PLUGIN.path, workingDirectory: '/\\not.*valid' },
         { name: LOG_CWD_PLUGIN.path }
-    ];
-    loadAndRunPlugins({ plugins, serverCwd }).then(({ hasMessageBy }) => {
+    ],
+    check: (t, { hasMessageBy }) => {
         t.ok(hasMessageBy(THIS_PLUGIN.name, 'Could not set working directory'));
         t.ok(hasMessageBy(THIS_PLUGIN.name, 'Meddling completed'));
-        t.ok(hasMessageBy(LOG_CWD_PLUGIN.name, serverCwd));
-        cleanupTemp();
-        t.end();
-    });
+        t.ok(hasMessageBy(LOG_CWD_PLUGIN.name, SERVER_CWD));
+    }
 });
 
 tape('cwd relative to the tsconfig directory', t => {

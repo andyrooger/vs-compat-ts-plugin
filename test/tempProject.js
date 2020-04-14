@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const rimraf = require('rimraf');
 const createTestServer = require('./TestServer');
+const tape = require('tape');
 
 const tempDir = path.resolve(__dirname, '.tempProject');
 
@@ -62,4 +63,25 @@ function loadAndRunPlugins({ plugins, serverCwd, tsServerDir, runServerCommands 
     });
 }
 
-module.exports = { setupTemp, cleanupTemp, createTempProject, loadTempFile, loadAndRunPlugins };
+function pluginTest(testName, { serverCwd, plugins, check }, only) {
+    (only ? tape.only : tape)(testName, t => {
+        setupTemp();
+        loadAndRunPlugins({ plugins, serverCwd }).
+            then((logGetters) => {
+                check(t, { ...logGetters });
+            })
+            .catch((err) => {
+                t.fail('Server failed to run: ' + err.toString());
+            })
+            .finally(() => {
+                cleanupTemp();
+                t.end();
+            });
+    });
+}
+
+pluginTest.only = function(...args) {
+    this.call(this, ...args, true)
+}
+
+module.exports = { setupTemp, cleanupTemp, createTempProject, loadTempFile, loadAndRunPlugins, pluginTest };
