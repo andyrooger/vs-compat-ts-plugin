@@ -20,8 +20,12 @@ function createTempProject(pluginsArray) {
         compilerOptions: {
             plugins: pluginsArray,
             sourceMap: false,
-            noEmit: true
-        }
+            noEmit: true,
+            noLib: true,
+            importHelpers: false
+        },
+        typeAcquisition: { enable: false },
+        compileOnSave: false
     };
 
     fs.writeFileSync(path.resolve(tempDir, 'tsconfig.json'), JSON.stringify(tsConfig));
@@ -29,9 +33,8 @@ function createTempProject(pluginsArray) {
 
 function loadTempFile(server, fileName, fileContent) {
     const tsFileName = path.resolve(tempDir, fileName);
-    fs.writeFileSync(tsFileName, fileContent);
 
-    server.send({ command: 'open', arguments: { file: tsFileName, fileContent: fileContent, scriptKindName: 'TS' } }, false);
+    server.send({ command: 'open', arguments: { file: tsFileName, fileContent: fileContent, scriptKindName: 'TS', projectFileName: path.resolve(tempDir, 'tsconfig.json') } }, false);
 }
 
 function loadAndRunPlugins({ plugins, serverCwd, tsServerDir, runServerCommands }) {
