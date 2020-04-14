@@ -4,7 +4,6 @@ const tape = require('tape');
 const { setupTemp, cleanupTemp, loadAndRunPlugins } = require('./tempProject');
 const { THIS_PLUGIN } = require('./fixtures');
 
-const unfindableThisPlugin = '../index.js'; // Can't be spotted because it does not contain the plugin name
 const EXPECTED_ERROR_CODE = 5088;
 
 function runServerCommands(server, fakeFile, projectFile) {

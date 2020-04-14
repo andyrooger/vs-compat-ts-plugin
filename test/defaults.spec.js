@@ -1,7 +1,5 @@
-const path = require('path');
-const fs = require('fs');
 const tape = require('tape');
-const { setupTemp, cleanupTemp, loadAndRunPlugins } = require('./tempProject');
+const { setupTemp, cleanupTemp, loadAndRunPlugins, pluginTest } = require('./tempProject');
 const { THIS_PLUGIN } = require('./fixtures');
 
 tape('cwd set to . by default', t => {
@@ -16,40 +14,31 @@ tape('cwd set to . by default', t => {
     });
 });
 
-tape('typescript mocked by default', t => {
-    setupTemp();
-    const plugins = [
+pluginTest('typescript mocked by default', {
+    plugins: [
         { name: THIS_PLUGIN.path }
-    ];
-    loadAndRunPlugins({ plugins }).then(({ hasMessageBy }) => {
+    ],
+    check: (t, { hasMessageBy }) => {
         t.ok(hasMessageBy(THIS_PLUGIN.name, 'Mocking typescript module with the version from tsserver'));
-        cleanupTemp();
-        t.end();
-    });
+    }
 });
 
-tape('default to off if onByDefault is set off', t => {
-    const tempDir = setupTemp();
-    const plugins = [
+pluginTest('default to off if onByDefault is set off', {
+    plugins: [
         { name: THIS_PLUGIN.path, onByDefault: false }
-    ];
-    loadAndRunPlugins({ plugins }).then(({ messagesBy, hasMessageBy }) => {
+    ],
+    check: (t, { hasMessageBy, messagesBy }) => {
         t.notOk(messagesBy(THIS_PLUGIN.name).some(msg => /Updating cwd/.test(msg)));
         t.notOk(hasMessageBy(THIS_PLUGIN.name, 'Mocking typescript module with the version from tsserver'));
-        cleanupTemp();
-        t.end();
-    });
+    }
 });
 
-tape('default to on if onByDefault is set on', t => {
-    const tempDir = setupTemp();
-    const plugins = [
+pluginTest('default to on if onByDefault is set on', {
+    plugins: [
         { name: THIS_PLUGIN.path, onByDefault: true }
-    ];
-    loadAndRunPlugins({ plugins }).then(({ messagesBy, hasMessageBy }) => {
+    ],
+    check: (t, { hasMessageBy, messagesBy }) => {
         t.ok(messagesBy(THIS_PLUGIN.name).some(msg => /Updating cwd/.test(msg)));
         t.ok(hasMessageBy(THIS_PLUGIN.name, 'Mocking typescript module with the version from tsserver'));
-        cleanupTemp();
-        t.end();
-    });
+    }
 });
