@@ -62,10 +62,10 @@ function loadAndRunPlugins({ plugins, serverCwd, tsServerDir, runServerCommands,
     });
 }
 
-function pluginTest(testName, { serverCwd, plugins, check }, only) {
+function pluginTest(testName, { serverCwd, typescriptServerDir, plugins, check }, only) {
     (only ? tape.only : tape)(testName, t => {
         setupTemp();
-        loadAndRunPlugins({ plugins, serverCwd }).
+        loadAndRunPlugins({ plugins, serverCwd, typescriptServerDir }).
             then((logGetters) => {
                 check(t, { ...logGetters });
             })
