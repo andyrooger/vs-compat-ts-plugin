@@ -1,5 +1,5 @@
 const tape = require('tape');
-const { pluginTest } = require('./tempProject');
+const { pluginTest } = require('./helpers');
 const { THIS_PLUGIN, LOG_TS_VERSIONS_PLUGIN, LOG_TOP_TS_VERSIONS_PLUGIN, BREAK_MOCK_REQUIRE_PLUGIN, TS_VERSIONS } = require('./fixtures');
 
 const serverTs = TS_VERSIONS['3.8'];

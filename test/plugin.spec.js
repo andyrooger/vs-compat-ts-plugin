@@ -1,4 +1,4 @@
-const { pluginTest } = require('./tempProject');
+const { pluginTest } = require('./helpers');
 const { THIS_PLUGIN } = require('./fixtures');
 
 pluginTest('loads successfully', {
