@@ -1,21 +1,10 @@
 const fs = require('fs');
 const path = require('path');
-const rimraf = require('rimraf');
 const TestServer = require('./TestServer');
 const tape = require('tape');
 const { PROJECT_DIR } = require('./fixtures');
 
 const LOG_FILE = path.resolve(PROJECT_DIR, 'logFile.log');
-
-function setupTemp() {
-    cleanupTemp();
-    fs.mkdirSync(PROJECT_DIR);
-    return PROJECT_DIR;
-}
-
-function cleanupTemp() {
-    rimraf.sync(PROJECT_DIR, { ignoreGlob: true });
-}
 
 function createTempProject(pluginsArray) {
     const tsConfig = {
@@ -51,7 +40,6 @@ function getMessagesBy(logContent) {
 
 function pluginTest(testName, { serverCwd, typescriptServerDir, plugins, serverCommands, check }, only) {
     (only ? tape.only : tape)(testName, t => {
-        setupTemp();
         createTempProject(plugins);
         const server = new TestServer({ cwd: serverCwd, logFile: LOG_FILE, typescriptServerDir });
         loadTempFile(server, 'file.ts', '// nothing exciting');
@@ -71,7 +59,6 @@ function pluginTest(testName, { serverCwd, typescriptServerDir, plugins, serverC
                 t.fail('Server failed to run: ' + err.toString());
             })
             .finally(() => {
-                cleanupTemp();
                 t.end();
             });
     });

@@ -1,4 +1,4 @@
-const { pluginTest } = require('./tempProject');
+const { pluginTest } = require('./helpers');
 const { THIS_PLUGIN, PROJECT_DIR } = require('./fixtures');
 
 pluginTest('cwd set to . by default', {

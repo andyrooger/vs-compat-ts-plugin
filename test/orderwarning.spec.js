@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const { pluginTest } = require('./tempProject');
+const { pluginTest } = require('./helpers');
 const { THIS_PLUGIN, PROJECT_DIR } = require('./fixtures');
 
 const PROJECT_FILE = path.resolve(PROJECT_DIR, 'tsconfig.json');

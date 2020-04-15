@@ -1,5 +1,5 @@
 const path = require('path');
-const { pluginTest } = require('./tempProject');
+const { pluginTest } = require('./helpers');
 const { THIS_PLUGIN, LOG_CWD_PLUGIN, LOG_LOADTIME_CWD_PLUGIN, EMPTY_DIRS, PROJECT_DIR } = require('./fixtures');
 
 const [SERVER_CWD, PLUGIN_CWD] = EMPTY_DIRS;
