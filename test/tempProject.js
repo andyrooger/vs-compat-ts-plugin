@@ -1,9 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 const rimraf = require('rimraf');
-const createTestServer = require('./TestServer');
+const TestServer = require('./TestServer');
 const tape = require('tape');
 const { PROJECT_DIR } = require('./fixtures');
+
+const LOG_FILE = path.resolve(PROJECT_DIR, 'logFile.log');
 
 function setupTemp() {
     cleanupTemp();
@@ -37,37 +39,33 @@ function loadTempFile(server, fileName, fileContent) {
     server.send({ command: 'open', arguments: { file: tsFileName, fileContent: fileContent, scriptKindName: 'TS', projectFileName: path.resolve(PROJECT_DIR, 'tsconfig.json') } }, false);
 }
 
-function loadAndRunPlugins({ plugins, serverCwd, tsServerDir, runServerCommands, typescriptServerDir }) {
-    createTempProject(plugins);
-    const logFile = path.resolve(PROJECT_DIR, 'logFile.log');
-    const server = createTestServer({ cwd: serverCwd, logFile, tsServerDir, typescriptServerDir });
-    loadTempFile(server, 'file.ts', '// nothing exciting');
-    (runServerCommands || function(){})(server, 'file.ts', path.resolve(PROJECT_DIR, 'tsconfig.json'));
-
-    return server.processAndExit().then(() => {
-        const logContent = fs.readFileSync(logFile).toString();
-        const responses = server.responses;
-        function messagesBy(plugin) {
-            return logContent
-                .split('\n')
-                .map(line => line.trim())
-                .filter(line => line.indexOf(`[${plugin}] `) !== -1)
-                .map(line => line.substr(line.indexOf(`[${plugin}] `) + plugin.length + 3));
-        }
-        function hasMessageBy(plugin, msg) {
-            return messagesBy(plugin).indexOf(msg) !== -1;
-        }
-
-        return { logContent, responses, messagesBy, hasMessageBy };
-    });
+function getMessagesBy(logContent) {
+    return function messagesBy(plugin) {
+        return logContent
+            .split('\n')
+            .map(line => line.trim())
+            .filter(line => line.indexOf(`[${plugin}] `) !== -1)
+            .map(line => line.substr(line.indexOf(`[${plugin}] `) + plugin.length + 3));
+    }
 }
 
-function pluginTest(testName, { serverCwd, typescriptServerDir, plugins, check }, only) {
+function pluginTest(testName, { serverCwd, typescriptServerDir, plugins, serverCommands, check }, only) {
     (only ? tape.only : tape)(testName, t => {
         setupTemp();
-        loadAndRunPlugins({ plugins, serverCwd, typescriptServerDir }).
-            then((logGetters) => {
-                check(t, { ...logGetters });
+        createTempProject(plugins);
+        const server = new TestServer({ cwd: serverCwd, logFile: LOG_FILE, typescriptServerDir });
+        loadTempFile(server, 'file.ts', '// nothing exciting');
+        if(serverCommands) {
+            serverCommands(server);
+        }
+        server.processAndExit()
+            .then(() => {
+                const logContent = fs.readFileSync(LOG_FILE).toString();
+                const responses = server.responses;
+                const messagesBy = getMessagesBy(logContent);
+                const hasMessageBy = (plugin, msg) => messagesBy(plugin).indexOf(msg) !== -1;
+
+                check(t, { logContent, responses, messagesBy, hasMessageBy });
             })
             .catch((err) => {
                 t.fail('Server failed to run: ' + err.toString());
@@ -83,4 +81,4 @@ pluginTest.only = function(...args) {
     this.call(this, ...args, true)
 }
 
-module.exports = { setupTemp, cleanupTemp, createTempProject, loadTempFile, loadAndRunPlugins, pluginTest };
+module.exports = { pluginTest };
