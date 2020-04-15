@@ -3,17 +3,16 @@ const path = require('path');
 const rimraf = require('rimraf');
 const createTestServer = require('./TestServer');
 const tape = require('tape');
-
-const tempDir = path.resolve(__dirname, '.tempProject');
+const { PROJECT_DIR } = require('./fixtures');
 
 function setupTemp() {
     cleanupTemp();
-    fs.mkdirSync(tempDir);
-    return tempDir;
+    fs.mkdirSync(PROJECT_DIR);
+    return PROJECT_DIR;
 }
 
 function cleanupTemp() {
-    rimraf.sync(tempDir, { ignoreGlob: true });
+    rimraf.sync(PROJECT_DIR, { ignoreGlob: true });
 }
 
 function createTempProject(pluginsArray) {
@@ -29,21 +28,21 @@ function createTempProject(pluginsArray) {
         compileOnSave: false
     };
 
-    fs.writeFileSync(path.resolve(tempDir, 'tsconfig.json'), JSON.stringify(tsConfig));
+    fs.writeFileSync(path.resolve(PROJECT_DIR, 'tsconfig.json'), JSON.stringify(tsConfig));
 }
 
 function loadTempFile(server, fileName, fileContent) {
-    const tsFileName = path.resolve(tempDir, fileName);
+    const tsFileName = path.resolve(PROJECT_DIR, fileName);
 
-    server.send({ command: 'open', arguments: { file: tsFileName, fileContent: fileContent, scriptKindName: 'TS', projectFileName: path.resolve(tempDir, 'tsconfig.json') } }, false);
+    server.send({ command: 'open', arguments: { file: tsFileName, fileContent: fileContent, scriptKindName: 'TS', projectFileName: path.resolve(PROJECT_DIR, 'tsconfig.json') } }, false);
 }
 
 function loadAndRunPlugins({ plugins, serverCwd, tsServerDir, runServerCommands, typescriptServerDir }) {
     createTempProject(plugins);
-    const logFile = path.resolve(tempDir, 'logFile.log');
+    const logFile = path.resolve(PROJECT_DIR, 'logFile.log');
     const server = createTestServer({ cwd: serverCwd, logFile, tsServerDir, typescriptServerDir });
     loadTempFile(server, 'file.ts', '// nothing exciting');
-    (runServerCommands || function(){})(server, 'file.ts', path.resolve(tempDir, 'tsconfig.json'));
+    (runServerCommands || function(){})(server, 'file.ts', path.resolve(PROJECT_DIR, 'tsconfig.json'));
 
     return server.processAndExit().then(() => {
         const logContent = fs.readFileSync(logFile).toString();

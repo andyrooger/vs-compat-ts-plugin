@@ -1,17 +1,13 @@
-const tape = require('tape');
-const { setupTemp, cleanupTemp, loadAndRunPlugins, pluginTest } = require('./tempProject');
-const { THIS_PLUGIN } = require('./fixtures');
+const { pluginTest } = require('./tempProject');
+const { THIS_PLUGIN, PROJECT_DIR } = require('./fixtures');
 
-tape('cwd set to . by default', t => {
-    const tempDir = setupTemp();
-    const plugins = [
+pluginTest('cwd set to . by default', {
+    plugins: [
         { name: THIS_PLUGIN.path }
-    ];
-    loadAndRunPlugins({ plugins }).then(({ hasMessageBy }) => {
-        t.ok(hasMessageBy(THIS_PLUGIN.name, `Updating cwd to ${tempDir}`));
-        cleanupTemp();
-        t.end();
-    });
+    ],
+    check: (t, { hasMessageBy }) => {
+        t.ok(hasMessageBy(THIS_PLUGIN.name, `Updating cwd to ${PROJECT_DIR}`));
+    }
 });
 
 pluginTest('typescript mocked by default', {

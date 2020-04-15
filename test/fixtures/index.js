@@ -28,5 +28,6 @@ module.exports = {
     EMPTY_DIRS: [
         path.resolve(__dirname, 'dirs', 'dir1'),
         path.resolve(__dirname, 'dirs', 'dir2')
-    ]
+    ],
+    PROJECT_DIR: path.resolve(__dirname, '..', '.tempProject')
 };
