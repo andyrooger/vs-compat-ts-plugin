@@ -16,6 +16,7 @@ jobs:
       name: node/default
       tag: "10.14"
     steps:
+      - run: npm install -g npm@latest
       - test
 
   test-windows:
