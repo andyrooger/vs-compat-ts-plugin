@@ -47,6 +47,12 @@
     "typescript30": "npm:typescript@3.0.1",
     "typescript38": "npm:typescript@3.8.3"
   },
+  "dependencies": {
+    "mock-require": "^3.0.3"
+  },
+  "peerDependencies": {
+    "typescript": ">=2.9"
+  },
   "release": {
     "plugins": [
       "@semantic-release/commit-analyzer",
@@ -66,8 +72,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "dependencies": {
-    "mock-require": "^3.0.3"
   }
 }
