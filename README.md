@@ -11,6 +11,11 @@ TypeScript language service plugin to let more plugins work in Visual Studio.
 
 Many language service plugins work perfectly in VS Code, but using them in Visual Studio will break due to various niggles. Ideally these would all be fixed without hacks like this but this plugin can be used as a temporary measure until then.
 
+## Compatibility
+
+* Node: >= 10.14
+* TypeScript >= 2.9
+
 ## Installation
 
 ```shell
@@ -64,10 +69,10 @@ Relative to the tsconfig. Null means do not set a working directory.
 
 **useVSTypescript (bool - default true)**
 
-Language service plugins should be using the version of typescript that's passed to them by tsserver. Tools they use, such as linters, tend to use the standard `require('typescript')` to pick up typescript.
-When tsserver is running from local npm depencencies, this is fine and both typescripts will be the same module. In Visual Studio, tsserver runs from a separate installation and so these modules are likely to be different. The result is various difficult to diagnose errors in plugins.
+Language service plugins should be using the version of TypeScript that's passed to them by tsserver. Tools they use, such as linters, tend to use the standard `require('typescript')` to pick up TypeScript.
+When tsserver is running from local npm depencencies, this is fine and both TypeScript will be the same module. In Visual Studio, tsserver runs from a separate installation and so these modules are likely to be different. The result is various difficult to diagnose errors in plugins.
 
-This option mocks `require('typescript')` so that tools pick up the same typescript version that tsserver is running from.
+This option mocks `require('typescript')` so that tools pick up the same TypeScript version that tsserver is running from.
 
 **onByDefault (bool - default true)**
 
