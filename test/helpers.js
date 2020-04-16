@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const TestServer = require('./TestServer');
 const tape = require('tape');
-const { PROJECT_DIR } = require('./fixtures');
+const { PROJECT_DIR, PROJECT_FILE, PROJECT_CONTENT, TS_VERSIONS } = require('./fixtures');
 
 const LOG_FILE = path.resolve(PROJECT_DIR, 'logFile.log');
 
@@ -19,13 +19,7 @@ function createTempProject(pluginsArray) {
         compileOnSave: false
     };
 
-    fs.writeFileSync(path.resolve(PROJECT_DIR, 'tsconfig.json'), JSON.stringify(tsConfig));
-}
-
-function loadTempFile(server, fileName, fileContent) {
-    const tsFileName = path.resolve(PROJECT_DIR, fileName);
-
-    server.send({ command: 'open', arguments: { file: tsFileName, fileContent: fileContent, scriptKindName: 'TS', projectFileName: path.resolve(PROJECT_DIR, 'tsconfig.json') } }, false);
+    fs.writeFileSync(PROJECT_FILE, JSON.stringify(tsConfig));
 }
 
 function getMessagesBy(logContent) {
@@ -38,34 +32,38 @@ function getMessagesBy(logContent) {
     }
 }
 
-function pluginTest(testName, { serverCwd, typescriptServerDir, plugins, serverCommands, check }, only) {
-    (only ? tape.only : tape)(testName, t => {
-        createTempProject(plugins);
-        const server = new TestServer({ cwd: serverCwd, logFile: LOG_FILE, typescriptServerDir });
-        loadTempFile(server, 'file.ts', '// nothing exciting');
-        if(serverCommands) {
-            serverCommands(server);
-        }
-        server.processAndExit()
-            .then(() => {
-                const logContent = fs.readFileSync(LOG_FILE).toString();
-                const responses = server.responses;
-                const messagesBy = getMessagesBy(logContent);
-                const hasMessageBy = (plugin, msg) => messagesBy(plugin).indexOf(msg) !== -1;
+function pluginTest(testName, { serverCwd, plugins, serverCommands, check }, onlyTsVersion) {
+    const testTsVersions = onlyTsVersion ? [TS_VERSIONS[onlyTsVersion]] : Object.keys(TS_VERSIONS).filter(key => key !== 'default').map(key => TS_VERSIONS[key]);
+    
+    for(const tsVersion of testTsVersions) {
+        (onlyTsVersion ? tape.only : tape)(`${testName} (TS ${tsVersion.version})`, t => {
+            createTempProject(plugins);
+            const server = new TestServer({ cwd: serverCwd, logFile: LOG_FILE, typescriptServerDir: tsVersion.path });
+            server.send({ command: 'open', arguments: { file: PROJECT_CONTENT } }, false);
+            if(serverCommands) {
+                serverCommands(server);
+            }
+            server.processAndExit()
+                .then(() => {
+                    const logContent = fs.readFileSync(LOG_FILE).toString();
+                    const responses = server.responses;
+                    const messagesBy = getMessagesBy(logContent);
+                    const hasMessageBy = (plugin, msg) => messagesBy(plugin).indexOf(msg) !== -1;
 
-                check(t, { logContent, responses, messagesBy, hasMessageBy });
-            })
-            .catch((err) => {
-                t.fail('Server failed to run: ' + err.toString());
-            })
-            .finally(() => {
-                t.end();
-            });
-    });
+                    check(t, { logContent, responses, messagesBy, hasMessageBy, tsVersion });
+                })
+                .catch((err) => {
+                    t.fail('Server failed to run: ' + err.toString());
+                })
+                .finally(() => {
+                    t.end();
+                });
+        });
+    }
 }
 
 pluginTest.only = function(...args) {
-    this.call(this, ...args, true)
+    this.call(this, ...args, 'default')
 }
 
 module.exports = { pluginTest };

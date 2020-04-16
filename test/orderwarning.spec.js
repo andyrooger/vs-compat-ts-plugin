@@ -1,9 +1,8 @@
 const path = require('path');
 const fs = require('fs');
 const { pluginTest } = require('./helpers');
-const { THIS_PLUGIN, PROJECT_DIR } = require('./fixtures');
+const { THIS_PLUGIN, PROJECT_FILE } = require('./fixtures');
 
-const PROJECT_FILE = path.resolve(PROJECT_DIR, 'tsconfig.json');
 const EXPECTED_ERROR_CODE = 5088;
 
 function getTsConfigDiagnostics(server) {
