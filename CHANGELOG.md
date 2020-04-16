@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v2.1.0...v2.2.0) (2020-04-16)
+
+
+### Features
+
+* **package:** TS as a peer dependency ([86ea026](https://github.com/andyrooger/vs-compat-ts-plugin/commit/86ea026c6edbc594d9f33516e7d7173ace135227)), closes [#14](https://github.com/andyrooger/vs-compat-ts-plugin/issues/14)
+
 # [2.1.0](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v2.0.0...v2.1.0) (2020-04-13)
 
 
