@@ -9,16 +9,26 @@ jobs:
     
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node: [10.x, 12.x, 14.x]
         os: [ubuntu-latest, windows-latest, macos-latest]
         
     runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js ${{ matrix.node }}
       uses: actions/setup-node@v1
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: ${{ matrix.node }}
+    - name: Get npm cache directory
+      id: npm-cache
+      run: echo "::set-output name=dir::$(npm config get cache)"
+    - uses: actions/cache@v2
+      with:
+        path: ${{ steps.npm-cache.outputs.dir }}
+        key: npm-${{ runner.os }}-${{ matrix.node }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          npm-${{ runner.os }}-${{ matrix.node }}-
+          npm-${{ runner.os }}-
     - run: npm ci
     - run: npm test
