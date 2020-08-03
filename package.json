@@ -11,7 +11,6 @@
   },
   "scripts": {
     "test": "tape test/*.spec.js",
-    "junit": "npm test | tap-junit --output test/results/tap --name tape.xml",
     "semantic-release": "semantic-release"
   },
   "repository": {
@@ -40,7 +39,6 @@
     "cz-conventional-changelog": "^3.2.0",
     "husky": "^4.2.5",
     "semantic-release": "^17.0.4",
-    "tap-junit": "^3.1.2",
     "tape": "^4.13.2",
     "typescript": "3.7.5",
     "typescript29": "npm:typescript@2.9.1",
