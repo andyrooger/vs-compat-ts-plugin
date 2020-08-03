@@ -23,7 +23,7 @@ module.exports = {
     },
     TS_VERSIONS: { 
         // Latest and oldest of each major release
-        '3.8': { version: '3.8.3', path: path.resolve(__dirname, '..', '..', 'node_modules', 'typescript38') },
+        '3.9': { version: '3.9.7', path: path.resolve(__dirname, '..', '..', 'node_modules', 'typescript39') },
         '3.0': { version: '3.0.1', path: path.resolve(__dirname, '..', '..', 'node_modules', 'typescript30') },
         '2.9': { version: '2.9.1', path: path.resolve(__dirname, '..', '..', 'node_modules', 'typescript29') },
          // Can't go back further than 2.8 because tsserver won't work on node 10 (https://github.com/microsoft/TypeScript/commit/1fc3aebc20a13048d6595395f721c6b0078c2c08)
