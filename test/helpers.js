@@ -36,28 +36,29 @@ function pluginTest(testName, { serverCwd, plugins, serverCommands, check }, onl
     const testTsVersions = onlyTsVersion ? [TS_VERSIONS[onlyTsVersion]] : Object.keys(TS_VERSIONS).filter(key => key !== 'default').map(key => TS_VERSIONS[key]);
     
     for(const tsVersion of testTsVersions) {
-        (onlyTsVersion ? tape.only : tape)(`${testName} (TS ${tsVersion.version})`, t => {
+        (onlyTsVersion ? tape.only : tape)(`${testName} (TS ${tsVersion.version})`, async t => {
             createTempProject(plugins);
             const server = new TestServer({ cwd: serverCwd, logFile: LOG_FILE, typescriptServerDir: tsVersion.path });
             server.send({ command: 'open', arguments: { file: PROJECT_CONTENT } }, false);
             if(serverCommands) {
                 serverCommands(server);
             }
-            server.processAndExit()
-                .then(() => {
-                    const logContent = fs.readFileSync(LOG_FILE).toString();
-                    const responses = server.responses;
-                    const messagesBy = getMessagesBy(logContent);
-                    const hasMessageBy = (plugin, msg) => messagesBy(plugin).indexOf(msg) !== -1;
+            try {
+                await server.processAndExit();
+                
+                const logContent = fs.readFileSync(LOG_FILE).toString();
+                const responses = server.responses;
+                const messagesBy = getMessagesBy(logContent);
+                const hasMessageBy = (plugin, msg) => messagesBy(plugin).indexOf(msg) !== -1;
 
-                    check(t, { logContent, responses, messagesBy, hasMessageBy, tsVersion });
-                })
-                .catch((err) => {
-                    t.fail('Server failed to run: ' + err.toString());
-                })
-                .finally(() => {
-                    t.end();
-                });
+                check(t, { logContent, responses, messagesBy, hasMessageBy, tsVersion });
+            }
+            catch(err) {
+                t.fail('Server failed to run: ' + err.toString());
+            }
+            finally {
+                t.end();
+            }
         });
     }
 }
