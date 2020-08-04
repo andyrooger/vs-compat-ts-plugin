@@ -19,16 +19,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node }}
-    - name: Get npm cache directory
-      id: npm-cache
-      run: echo "::set-output name=dir::$(npm config get cache)"
-    - uses: actions/cache@v2
-      with:
-        path: ${{ steps.npm-cache.outputs.dir }}
-        key: npm-${{ runner.os }}-${{ matrix.node }}-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          npm-${{ runner.os }}-${{ matrix.node }}-
-          npm-${{ runner.os }}-
     - run: npm ci
     - run: npm test
 
@@ -43,13 +33,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
-    - uses: actions/cache@v2
-      with:
-        path: ~/.npm
-        key: npm-${{ runner.os }}-14.x-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          npm-${{ runner.os }}-14.x-
-          npm-${{ runner.os }}-
     - run: npm ci
     - run: npm run semantic-release
       env:
