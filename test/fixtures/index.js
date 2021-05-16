@@ -4,7 +4,7 @@ module.exports = {
     THIS_PLUGIN: {
         name: 'vs-compat-ts-plugin',
         path: 'vs-compat-ts-plugin',
-        namelessPath: '../index.js' // For loading the plugin without having the package name in the path
+        namelessPath: '../../../../../index.js' // For loading the plugin without having the package name in the path
     },
     LOG_CWD_PLUGIN: {
         name: 'logCwdPlugin', path: '@vs-compat-ts-plugin/log-cwd-plugin'

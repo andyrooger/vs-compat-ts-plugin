@@ -30,7 +30,7 @@ function getThisPluginNode(ts, pluginsArrayNode) {
                 return false;
             }
             const nameAssignments = getChildren(node, false, ts.SyntaxKind.PropertyAssignment).filter(node => node.name.text === 'name')
-            return nameAssignments.some(node => node.initializer.kind === ts.SyntaxKind.StringLiteral && /(^|\\|\/)vs-compat-ts-plugin($|\\|\/)/.test(node.initializer.text));
+            return nameAssignments.some(node => node.initializer.kind === ts.SyntaxKind.StringLiteral && node.initializer.text === 'vs-compat-ts-plugin');
         })[0];
 }
 
