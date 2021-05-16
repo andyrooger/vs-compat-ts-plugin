@@ -25,8 +25,7 @@ pluginTest('should log but not warn if plugin cannot be found in the list', {
 pluginTest('should warn when something precedes this plugin in plugins list', {
     plugins: [
         { name: 'other-plugin' },
-        { name: THIS_PLUGIN.name },
-        { name: THIS_PLUGIN.namelessPath }
+        { name: THIS_PLUGIN.name }
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses }) => {
@@ -39,8 +38,7 @@ pluginTest('should warn when something precedes this plugin in plugins list', {
 pluginTest('should not warn when this plugin is first in plugins list', {
     plugins: [
         { name: THIS_PLUGIN.name },
-        { name: 'other-plugin' },
-        { name: THIS_PLUGIN.namelessPath }
+        { name: 'other-plugin' }
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses }) => {
@@ -52,8 +50,7 @@ pluginTest('should not warn when this plugin is first in plugins list', {
 pluginTest('should not warn when found outside the normal plugins list', {
     plugins: [
         { name: THIS_PLUGIN.name },
-        { name: 'other-plugin', config: { plugins: [{ name: THIS_PLUGIN.name }] } },
-        { name: THIS_PLUGIN.namelessPath }
+        { name: 'other-plugin', config: { plugins: [{ name: THIS_PLUGIN.name }] } }
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses }) => {
@@ -65,8 +62,7 @@ pluginTest('should not warn when found outside the normal plugins list', {
 pluginTest('should mark error across the whole plugin def object in the source', {
     plugins: [
         { name: 'other-plugin' },
-        { name: THIS_PLUGIN.name },
-        { name: THIS_PLUGIN.namelessPath }
+        { name: THIS_PLUGIN.name }
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses }) => {
@@ -83,8 +79,7 @@ pluginTest('should mark error across the whole plugin def object in the source',
 pluginTest('should be warning with a sensible message', {
     plugins: [
         { name: 'other-plugin' },
-        { name: THIS_PLUGIN.name },
-        { name: THIS_PLUGIN.namelessPath }
+        { name: THIS_PLUGIN.name }
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses }) => {
@@ -99,36 +94,7 @@ pluginTest('should be warning with a sensible message', {
 pluginTest('should find the plugin by its package name', {
     plugins: [
         { name: 'other-plugin' },
-        { name: THIS_PLUGIN.name },
-        { name: THIS_PLUGIN.namelessPath }
-    ],
-    serverCommands: getTsConfigDiagnostics,
-    check: (t, { responses }) => {
-        t.ok(responses[0].success);
-        t.equal(responses[0].body.length, 1);
-        t.equal(responses[0].body[0].code, EXPECTED_ERROR_CODE);
-    }
-});
-
-pluginTest('should find the plugin in local paths', {
-    plugins: [
-        { name: 'other-plugin' },
-        { name: path.join('..', THIS_PLUGIN.name) },
-        { name: THIS_PLUGIN.namelessPath }
-    ],
-    serverCommands: getTsConfigDiagnostics,
-    check: (t, { responses }) => {
-        t.ok(responses[0].success);
-        t.equal(responses[0].body.length, 1);
-        t.equal(responses[0].body[0].code, EXPECTED_ERROR_CODE);
-    }
-});
-
-pluginTest('should find the plugin when requesting a specific file', {
-    plugins: [
-        { name: 'other-plugin' },
-        { name: path.join(THIS_PLUGIN.name, 'index.js') },
-        { name: THIS_PLUGIN.namelessPath }
+        { name: THIS_PLUGIN.name }
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses }) => {
@@ -140,7 +106,6 @@ pluginTest('should find the plugin when requesting a specific file', {
 
 pluginTest('should not find the plugin when it appears in another plugin name', {
     plugins: [
-        { name: THIS_PLUGIN.namelessPath },
         { name: 'not-vs-compat-ts-plugin' }
     ],
     serverCommands: getTsConfigDiagnostics,
@@ -154,7 +119,6 @@ pluginTest('should be ok with the plugin appearing twice if one comes first', {
     plugins: [
         { name: THIS_PLUGIN.name },
         { name: THIS_PLUGIN.name },
-        { name: THIS_PLUGIN.namelessPath }
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses }) => {
