@@ -5,7 +5,7 @@ pluginTest('loads successfully', {
     plugins: [
         { name: THIS_PLUGIN.path }
     ],
-    check: (t, { hasMessageBy }) => {
-        t.ok(hasMessageBy(THIS_PLUGIN.name, 'Loaded plugin'));
+    check: (t, { assertHasMessageBy }) => {
+        assertHasMessageBy(THIS_PLUGIN.name, 'Loaded plugin');
     }
 });

@@ -49,9 +49,22 @@ function pluginTest(testName, { serverCwd, plugins, serverCommands, check }, onl
                 const logContent = fs.readFileSync(LOG_FILE).toString();
                 const responses = server.responses;
                 const messagesBy = getMessagesBy(logContent);
-                const hasMessageBy = (plugin, msg) => messagesBy(plugin).indexOf(msg) !== -1;
+                const assertHasMessageBy = (plugin, msg) => {
+                    const hasMessageBy = messagesBy(plugin).indexOf(msg) !== -1;
+                    if(!hasMessageBy) {
+                        t.comment(logContent);
+                    }
+                    t.ok(hasMessageBy);
+                };
+                const assertNotHasMessageBy = (plugin, msg) => {
+                    const hasMessageBy = messagesBy(plugin).indexOf(msg) !== -1;
+                    if(hasMessageBy) {
+                        t.comment(logContent);
+                    }
+                    t.notOk(hasMessageBy);
+                };
 
-                check(t, { logContent, responses, messagesBy, hasMessageBy, tsVersion });
+                check(t, { logContent, responses, messagesBy, assertHasMessageBy, assertNotHasMessageBy, tsVersion });
             }
             catch(err) {
                 t.fail('Server failed to run: ' + err.toString());

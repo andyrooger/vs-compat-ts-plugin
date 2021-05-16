@@ -5,8 +5,8 @@ pluginTest('cwd set to . by default', {
     plugins: [
         { name: THIS_PLUGIN.path }
     ],
-    check: (t, { hasMessageBy }) => {
-        t.ok(hasMessageBy(THIS_PLUGIN.name, `Updating cwd to ${PROJECT_DIR}`));
+    check: (t, { assertHasMessageBy }) => {
+        assertHasMessageBy(THIS_PLUGIN.name, `Updating cwd to ${PROJECT_DIR}`);
     }
 });
 
@@ -14,8 +14,8 @@ pluginTest('typescript mocked by default', {
     plugins: [
         { name: THIS_PLUGIN.path }
     ],
-    check: (t, { hasMessageBy }) => {
-        t.ok(hasMessageBy(THIS_PLUGIN.name, 'Mocking typescript module with the version from tsserver'));
+    check: (t, { assertHasMessageBy }) => {
+        assertHasMessageBy(THIS_PLUGIN.name, 'Mocking typescript module with the version from tsserver');
     }
 });
 
@@ -23,9 +23,9 @@ pluginTest('default to off if onByDefault is set off', {
     plugins: [
         { name: THIS_PLUGIN.path, onByDefault: false }
     ],
-    check: (t, { hasMessageBy, messagesBy }) => {
+    check: (t, { assertNotHasMessageBy, messagesBy }) => {
         t.notOk(messagesBy(THIS_PLUGIN.name).some(msg => /Updating cwd/.test(msg)));
-        t.notOk(hasMessageBy(THIS_PLUGIN.name, 'Mocking typescript module with the version from tsserver'));
+        assertNotHasMessageBy(THIS_PLUGIN.name, 'Mocking typescript module with the version from tsserver');
     }
 });
 
@@ -33,8 +33,8 @@ pluginTest('default to on if onByDefault is set on', {
     plugins: [
         { name: THIS_PLUGIN.path, onByDefault: true }
     ],
-    check: (t, { hasMessageBy, messagesBy }) => {
+    check: (t, { assertHasMessageBy, messagesBy }) => {
         t.ok(messagesBy(THIS_PLUGIN.name).some(msg => /Updating cwd/.test(msg)));
-        t.ok(hasMessageBy(THIS_PLUGIN.name, 'Mocking typescript module with the version from tsserver'));
+        assertHasMessageBy(THIS_PLUGIN.name, 'Mocking typescript module with the version from tsserver');
     }
 });

@@ -16,9 +16,9 @@ pluginTest('typescript not mocked if useVSTypescript is false', {
         { name: THIS_PLUGIN.path, useVSTypescript: false },
         { name: LOG_TS_VERSIONS_PLUGIN.path }
     ],
-    check: (t, { hasMessageBy, tsVersion }) => {
-        t.ok(hasMessageBy(LOG_TS_VERSIONS_PLUGIN.name, `required: ${TS_VERSIONS.default.version}`));
-        t.ok(hasMessageBy(LOG_TS_VERSIONS_PLUGIN.name, `plugin: ${tsVersion.version}`));
+    check: (t, { assertHasMessageBy, tsVersion }) => {
+        assertHasMessageBy(LOG_TS_VERSIONS_PLUGIN.name, `required: ${TS_VERSIONS.default.version}`);
+        assertHasMessageBy(LOG_TS_VERSIONS_PLUGIN.name, `plugin: ${tsVersion.version}`);
     }
 });
 
@@ -27,9 +27,9 @@ pluginTest('typescript is mocked if useVSTypescript is true', {
         { name: THIS_PLUGIN.path, useVSTypescript: true },
         { name: LOG_TS_VERSIONS_PLUGIN.path }
     ],
-    check: (t, { hasMessageBy, tsVersion }) => {
-        t.ok(hasMessageBy(LOG_TS_VERSIONS_PLUGIN.name, `required: ${tsVersion.version}`));
-        t.ok(hasMessageBy(LOG_TS_VERSIONS_PLUGIN.name, `plugin: ${tsVersion.version}`));
+    check: (t, { assertHasMessageBy, tsVersion }) => {
+        assertHasMessageBy(LOG_TS_VERSIONS_PLUGIN.name, `required: ${tsVersion.version}`);
+        assertHasMessageBy(LOG_TS_VERSIONS_PLUGIN.name, `plugin: ${tsVersion.version}`);
     }
 });
 
@@ -38,9 +38,9 @@ pluginTest('typescript is mocked even at the top level of other plugins if useVS
         { name: THIS_PLUGIN.path, useVSTypescript: true },
         { name: LOG_TOP_TS_VERSIONS_PLUGIN.path }
     ],
-    check: (t, { hasMessageBy, tsVersion }) => {
-        t.ok(hasMessageBy(LOG_TOP_TS_VERSIONS_PLUGIN.name, `required: ${tsVersion.version}`));
-        t.ok(hasMessageBy(LOG_TOP_TS_VERSIONS_PLUGIN.name, `plugin: ${tsVersion.version}`));
+    check: (t, { assertHasMessageBy, tsVersion }) => {
+        assertHasMessageBy(LOG_TOP_TS_VERSIONS_PLUGIN.name, `required: ${tsVersion.version}`);
+        assertHasMessageBy(LOG_TOP_TS_VERSIONS_PLUGIN.name, `plugin: ${tsVersion.version}`);
     }
 });
 
@@ -49,8 +49,8 @@ pluginTest('failed typescript mock does not break the plugin', {
         { name: BREAK_MOCK_REQUIRE_PLUGIN.path },
         { name: THIS_PLUGIN.path, useVSTypescript: true }
     ],
-    check: (t, { hasMessageBy }) => {
-        t.ok(hasMessageBy(THIS_PLUGIN.name, 'Could not mock typescript'));
-        t.ok(hasMessageBy(THIS_PLUGIN.name, 'Meddling completed'));
+    check: (t, { assertHasMessageBy }) => {
+        assertHasMessageBy(THIS_PLUGIN.name, 'Could not mock typescript');
+        assertHasMessageBy(THIS_PLUGIN.name, 'Meddling completed');
     }
 });

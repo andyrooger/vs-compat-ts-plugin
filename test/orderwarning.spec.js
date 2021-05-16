@@ -15,8 +15,8 @@ pluginTest('should log but not warn if plugin cannot be found in the list', {
         { name: THIS_PLUGIN.alias }
     ],
     serverCommands: getTsConfigDiagnostics,
-    check: (t, { responses, hasMessageBy }) => {
-        t.ok(hasMessageBy(THIS_PLUGIN.name, 'Could not find the plugin in the project plugin list'));
+    check: (t, { responses, assertHasMessageBy }) => {
+        assertHasMessageBy(THIS_PLUGIN.name, 'Could not find the plugin in the project plugin list');
         t.ok(responses[0].success);
         t.equal(responses[0].body.length, 0);
     }

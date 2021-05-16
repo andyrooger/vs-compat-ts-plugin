@@ -11,8 +11,8 @@ pluginTest('cwd is set before the next plugin init', {
         { name: THIS_PLUGIN.path, workingDirectory: PLUGIN_CWD },
         { name: LOG_CWD_PLUGIN.path }
     ],
-    check: (t, { hasMessageBy }) => {
-        t.ok(hasMessageBy(LOG_CWD_PLUGIN.name, PLUGIN_CWD));
+    check: (t, { assertHasMessageBy }) => {
+        assertHasMessageBy(LOG_CWD_PLUGIN.name, PLUGIN_CWD);
     }
 });
 
@@ -22,8 +22,8 @@ pluginTest('cwd is set before the next plugin is loaded', {
         { name: THIS_PLUGIN.path, workingDirectory: PLUGIN_CWD },
         { name: LOG_LOADTIME_CWD_PLUGIN.path }
     ],
-    check: (t, { hasMessageBy }) => {
-        t.ok(hasMessageBy(LOG_LOADTIME_CWD_PLUGIN.name, PLUGIN_CWD));
+    check: (t, { assertHasMessageBy }) => {
+        assertHasMessageBy(LOG_LOADTIME_CWD_PLUGIN.name, PLUGIN_CWD);
     }
 });
 
@@ -33,8 +33,8 @@ pluginTest('cwd not changed when null', {
         { name: THIS_PLUGIN.path, workingDirectory: null },
         { name: LOG_CWD_PLUGIN.path }
     ],
-    check: (t, { hasMessageBy }) => {
-        t.ok(hasMessageBy(LOG_CWD_PLUGIN.name, SERVER_CWD));
+    check: (t, { assertHasMessageBy }) => {
+        assertHasMessageBy(LOG_CWD_PLUGIN.name, SERVER_CWD);
     }
 });
 
@@ -44,10 +44,10 @@ pluginTest('invalid cwd does not break everything else', {
         { name: THIS_PLUGIN.path, workingDirectory: '/\\not.*valid' },
         { name: LOG_CWD_PLUGIN.path }
     ],
-    check: (t, { hasMessageBy }) => {
-        t.ok(hasMessageBy(THIS_PLUGIN.name, 'Could not set working directory'));
-        t.ok(hasMessageBy(THIS_PLUGIN.name, 'Meddling completed'));
-        t.ok(hasMessageBy(LOG_CWD_PLUGIN.name, SERVER_CWD));
+    check: (t, { assertHasMessageBy }) => {
+        assertHasMessageBy(THIS_PLUGIN.name, 'Could not set working directory');
+        assertHasMessageBy(THIS_PLUGIN.name, 'Meddling completed');
+        assertHasMessageBy(LOG_CWD_PLUGIN.name, SERVER_CWD);
     }
 });
 
@@ -57,8 +57,8 @@ pluginTest('cwd relative to the tsconfig directory', {
         { name: THIS_PLUGIN.path, workingDirectory: RELATIVE_PLUGIN_CWD },
         { name: LOG_CWD_PLUGIN.path }
     ],
-    check: (t, { hasMessageBy }) => {
-        t.ok(hasMessageBy(LOG_CWD_PLUGIN.name, PLUGIN_CWD));
+    check: (t, { assertHasMessageBy }) => {
+        assertHasMessageBy(LOG_CWD_PLUGIN.name, PLUGIN_CWD);
     }
 });
 
@@ -68,7 +68,7 @@ pluginTest('cwd can use forward slashes (in all OS)', {
         { name: THIS_PLUGIN.path, workingDirectory: RELATIVE_PLUGIN_CWD.replace(/\\/g, '/') },
         { name: LOG_CWD_PLUGIN.path }
     ],
-    check: (t, { hasMessageBy }) => {
-        t.ok(hasMessageBy(LOG_CWD_PLUGIN.name, PLUGIN_CWD));
+    check: (t, { assertHasMessageBy }) => {
+        assertHasMessageBy(LOG_CWD_PLUGIN.name, PLUGIN_CWD);
     }
 });
