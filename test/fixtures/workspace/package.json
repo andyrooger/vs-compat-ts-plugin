@@ -8,11 +8,13 @@
         "@vs-compat-ts-plugin/log-loadtime-cwd-plugin": "file:../plugins/log-loadtime-cwd-plugin",
         "@vs-compat-ts-plugin/log-top-ts-versions-plugin": "file:../plugins/log-top-ts-versions-plugin",
         "@vs-compat-ts-plugin/log-ts-versions-plugin": "file:../plugins/log-ts-versions-plugin",
+        "@vs-compat-ts-plugin/this": "file:../../..",
         "typescript": "3.7.5",
         "typescript29": "npm:typescript@2.9.1",
         "typescript30": "npm:typescript@3.0.1",
         "typescript39": "npm:typescript@3.9.9",
-        "vs-compat-ts-plugin": "file:../../..",
-        "@vs-compat-ts-plugin/this": "file:../../.."
+        "typescript40": "npm:typescript@4.0.7",
+        "typescript42": "npm:typescript@4.2.4",
+        "vs-compat-ts-plugin": "file:../../.."
     }
 }
