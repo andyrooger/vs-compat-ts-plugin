@@ -12,7 +12,7 @@ function getTsConfigDiagnostics(server) {
 pluginTest('should log but not warn if plugin cannot be found in the list', {
     plugins: [
         { name: 'other-plugin' },
-        { name: THIS_PLUGIN.namelessPath }
+        { name: THIS_PLUGIN.alias }
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses, hasMessageBy }) => {
