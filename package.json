@@ -35,6 +35,11 @@
   "devDependencies": {
     "@semantic-release/changelog": "^5.0.1",
     "@semantic-release/git": "^9.0.0",
+    "@vs-compat-ts-plugin/break-mock-require-plugin": "file:test/fixtures/plugins/break-mock-require-plugin",
+    "@vs-compat-ts-plugin/log-cwd-plugin": "file:test/fixtures/plugins/log-cwd-plugin",
+    "@vs-compat-ts-plugin/log-loadtime-cwd-plugin": "file:test/fixtures/plugins/log-loadtime-cwd-plugin",
+    "@vs-compat-ts-plugin/log-top-ts-versions-plugin": "file:test/fixtures/plugins/log-top-ts-versions-plugin",
+    "@vs-compat-ts-plugin/log-ts-versions-plugin": "file:test/fixtures/plugins/log-ts-versions-plugin",
     "commitizen": "^4.2.0",
     "cz-conventional-changelog": "^3.2.0",
     "husky": "^4.2.5",

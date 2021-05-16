@@ -7,19 +7,19 @@ module.exports = {
         namelessPath: '../index.js' // For loading the plugin without having the package name in the path
     },
     LOG_CWD_PLUGIN: {
-        name: 'logCwdPlugin', path: path.resolve(__dirname, 'plugins', 'logCwdPlugin.js')
+        name: 'logCwdPlugin', path: '@vs-compat-ts-plugin/log-cwd-plugin'
     },
     LOG_LOADTIME_CWD_PLUGIN: {
-        name: 'logLoadtimeCwdPlugin', path: path.resolve(__dirname, 'plugins', 'logLoadtimeCwdPlugin.js')
+        name: 'logLoadtimeCwdPlugin', path: '@vs-compat-ts-plugin/log-loadtime-cwd-plugin'
     },
     LOG_TS_VERSIONS_PLUGIN: {
-        name: 'logTsVersionsPlugin', path: path.resolve(__dirname, 'plugins', 'logTsVersionsPlugin.js')
+        name: 'logTsVersionsPlugin', path: '@vs-compat-ts-plugin/log-ts-versions-plugin'
     },
     LOG_TOP_TS_VERSIONS_PLUGIN: {
-        name: 'logTopTsVersionsPlugin', path: path.resolve(__dirname, 'plugins', 'logTopTsVersionsPlugin.js')
+        name: 'logTopTsVersionsPlugin', path: '@vs-compat-ts-plugin/log-top-ts-versions-plugin'
     },
     BREAK_MOCK_REQUIRE_PLUGIN: {
-        name: 'breakMockRequirePlugin', path: path.resolve(__dirname, 'plugins', 'breakMockRequirePlugin.js')
+        name: 'breakMockRequirePlugin', path: '@vs-compat-ts-plugin/break-mock-require-plugin'
     },
     TS_VERSIONS: { 
         // Latest and oldest of each major release
