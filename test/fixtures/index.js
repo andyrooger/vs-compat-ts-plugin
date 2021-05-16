@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
     THIS_PLUGIN: {
         name: 'vs-compat-ts-plugin',
-        path: path.resolve(__dirname, '..', '..', 'index.js'),
+        path: 'vs-compat-ts-plugin',
         namelessPath: '../index.js' // For loading the plugin without having the package name in the path
     },
     LOG_CWD_PLUGIN: {
@@ -23,14 +23,14 @@ module.exports = {
     },
     TS_VERSIONS: { 
         // Latest and oldest of each major release
-        '3.9': { version: '3.9.9', path: path.resolve(__dirname, '..', '..', 'node_modules', 'typescript39') },
-        '3.0': { version: '3.0.1', path: path.resolve(__dirname, '..', '..', 'node_modules', 'typescript30') },
-        '2.9': { version: '2.9.1', path: path.resolve(__dirname, '..', '..', 'node_modules', 'typescript29') },
+        '3.9': { version: '3.9.9', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript39') },
+        '3.0': { version: '3.0.1', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript30') },
+        '2.9': { version: '2.9.1', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript29') },
          // Can't go back further than 2.8 because tsserver won't work on node 10 (https://github.com/microsoft/TypeScript/commit/1fc3aebc20a13048d6595395f721c6b0078c2c08)
          // Can't go back further than 2.9 because the tsconfig warnings stop appearing
 
         // Has to be a different version to all the others for the tsversion tests
-        'default': { version: '3.7.5', path: path.resolve(__dirname, '..', '..', 'node_modules', 'typescript') }
+        'default': { version: '3.7.5', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript') }
     },
     EMPTY_DIRS: [
         path.resolve(__dirname, 'dirs', 'dir1'),
