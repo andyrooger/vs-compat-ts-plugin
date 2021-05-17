@@ -32,7 +32,7 @@ module.exports = {
          // Can't go back further than 2.9 because the tsconfig warnings stop appearing
 
         // Has to be a different version to all the others for the tsversion tests
-        'default': { version: '3.7.5', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript') }
+        'default': { version: '3.7.5', path: path.resolve(__dirname, '..', '..', 'node_modules', 'typescript') }
     },
     EMPTY_DIRS: [
         path.resolve(__dirname, 'dirs', 'dir1'),

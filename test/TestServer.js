@@ -9,7 +9,7 @@ class TestServer {
         const tsServerDir = typescriptServerDir || path.join(__dirname, '..', 'node_modules', 'typescript')
         const tsserverPath = path.join(tsServerDir, 'lib', 'tsserver');
         const server = fork(tsserverPath, [
-            '--pluginProbeLocations', path.join(__dirname, '..'),
+            '--pluginProbeLocations', path.join(tsServerDir, '..'),
             '--logFile', logFile,
             '--logVerbosity', 'info',
             '--disableAutomaticTypingAcquisition'
