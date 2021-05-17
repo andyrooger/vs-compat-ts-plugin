@@ -1,3 +1,10 @@
+# [2.3.0](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v2.2.0...v2.3.0) (2021-05-17)
+
+
+### Features
+
+* **orderwarning:** ignore plugins included by their local paths ([80e5be2](https://github.com/andyrooger/vs-compat-ts-plugin/commit/80e5be2246115cbb3bf435cb88439daa2c0cda03))
+
 # [2.2.0](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v2.1.0...v2.2.0) (2020-04-16)
 
 
