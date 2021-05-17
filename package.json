@@ -40,7 +40,8 @@
     "cz-conventional-changelog": "^3.2.0",
     "husky": "^4.2.5",
     "semantic-release": "^17.4.2",
-    "tape": "^5.0.1"
+    "tape": "^5.0.1",
+    "typescript": "^3.7.5"
   },
   "dependencies": {
     "mock-require": "^3.0.3"

@@ -1,5 +1,8 @@
 {
     "name": "@vs-compat-ts-plugin/log-ts-versions-plugin",
     "version": "0.0.0",
-    "private": true
+    "private": true,
+    "peerDependencies": {
+        "typescript": "*"
+    }
 }
