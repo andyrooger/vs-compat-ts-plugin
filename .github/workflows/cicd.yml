@@ -21,6 +21,7 @@ jobs:
       with:
         node-version: ${{ matrix.node }}
         cache: npm
+    - run: npm install -g npm@latest # Standard version seems to pull in incorrect package versions
     - run: npm ci
     - run: npm test
 
@@ -36,6 +37,7 @@ jobs:
       with:
         node-version: '14'
         cache: npm
+    - run: npm install -g npm@latest # Standard version seems to pull in incorrect package versions
     - run: npm ci
     - run: npm run semantic-release
       env:
