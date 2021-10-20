@@ -41,7 +41,7 @@
     "husky": "^4.2.5",
     "semantic-release": "^17.4.3",
     "tape": "^5.0.1",
-    "typescript": "^3.7.5"
+    "typescript": "^3.9.10"
   },
   "dependencies": {
     "mock-require": "^3.0.3"
