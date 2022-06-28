@@ -1,3 +1,15 @@
+# [3.0.0](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v2.3.0...v3.0.0) (2022-06-28)
+
+
+### Features
+
+* **node:** bump node support ([b2dddd9](https://github.com/andyrooger/vs-compat-ts-plugin/commit/b2dddd9c18e444346d0f7d3ed84d5dcd056b1c69)), closes [#42](https://github.com/andyrooger/vs-compat-ts-plugin/issues/42)
+
+
+### BREAKING CHANGES
+
+* **node:** Node 10 and 12 are no longer supported. 14.17+ only
+
 # [2.3.0](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v2.2.0...v2.3.0) (2021-05-17)
 
 
