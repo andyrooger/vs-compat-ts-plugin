@@ -13,7 +13,7 @@ Many language service plugins work perfectly in VS Code, but using them in Visua
 
 ## Compatibility
 
-* Node: >= 10.14
+* Node: >= 14.17
 * TypeScript >= 2.9
 
 ## Installation
