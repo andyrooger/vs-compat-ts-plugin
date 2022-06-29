@@ -13,7 +13,7 @@
         "typescript30": "npm:typescript@3.0.1",
         "typescript39": "npm:typescript@3.9.9",
         "typescript40": "npm:typescript@4.0.7",
-        "typescript42": "npm:typescript@4.2.4",
+        "typescript47": "npm:typescript@4.7.4",
         "vs-compat-ts-plugin": "file:../../.."
     }
 }
