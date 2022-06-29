@@ -35,10 +35,10 @@
   },
   "homepage": "https://github.com/andyrooger/vs-compat-ts-plugin#readme",
   "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
     "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
-    "commitizen": "^4.2.4",
-    "cz-conventional-changelog": "^3.3.0",
     "husky": "^8.0.1",
     "semantic-release": "^19.0.3",
     "tape": "^5.0.1",
@@ -60,9 +60,7 @@
       "@semantic-release/github"
     ]
   },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
+  "commitlint": {
+    "extends": ["@commitlint/config-conventional"]
   }
 }
