@@ -23,9 +23,10 @@ module.exports = {
     },
     TS_VERSIONS: { 
         // Latest and oldest of each major release
-        '4.2': { version: '4.7.4', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript47') },
+        '5.0': { version: '5.0.4', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript50') },
+        '4.9': { version: '4.9.5', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript49') },
         '4.0': { version: '4.0.7', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript40') },
-        '3.9': { version: '3.9.9', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript39') },
+        '3.9': { version: '3.9.10', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript39') },
         '3.0': { version: '3.0.1', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript30') },
         '2.9': { version: '2.9.1', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript29') },
          // Can't go back further than 2.9 because the tsconfig warnings stop appearing
