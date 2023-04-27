@@ -1,3 +1,10 @@
+# [3.1.0](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v3.0.0...v3.1.0) (2023-04-27)
+
+
+### Features
+
+* **node:** bump node support to 20 ([c861c7e](https://github.com/andyrooger/vs-compat-ts-plugin/commit/c861c7e21d664f473d51edc76140a8bed1c39307))
+
 # [3.0.0](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v2.3.0...v3.0.0) (2022-06-28)
 
 
