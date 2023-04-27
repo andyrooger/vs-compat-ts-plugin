@@ -11,7 +11,8 @@
   },
   "scripts": {
     "pretest": "cd test/fixtures/workspace && npm install --omit=dev --ignore-scripts && cd ../../..",
-    "test": "tape test/*.spec.js",
+    "test": "npm run tape",
+    "tape": "tape test/*.spec.js",
     "semantic-release": "semantic-release",
     "prepare": "husky install"
   },
