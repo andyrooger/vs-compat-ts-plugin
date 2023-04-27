@@ -10,7 +10,7 @@
     "node": ">=14.17"
   },
   "scripts": {
-    "pretest": "cd test/fixtures/workspace && npm install --omit=dev && cd ../../..",
+    "pretest": "cd test/fixtures/workspace && npm install --omit=dev --ignore-scripts && cd ../../..",
     "test": "tape test/*.spec.js",
     "semantic-release": "semantic-release",
     "prepare": "husky install"
