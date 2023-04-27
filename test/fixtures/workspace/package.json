@@ -2,7 +2,7 @@
     "name": "@vs-compat-ts-plugin/test",
     "version": "0.0.0",
     "private": true,
-    "devDependencies": {
+    "dependencies": {
         "@vs-compat-ts-plugin/break-mock-require-plugin": "file:../plugins/break-mock-require-plugin",
         "@vs-compat-ts-plugin/log-cwd-plugin": "file:../plugins/log-cwd-plugin",
         "@vs-compat-ts-plugin/log-loadtime-cwd-plugin": "file:../plugins/log-loadtime-cwd-plugin",
