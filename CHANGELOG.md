@@ -1,3 +1,11 @@
+## [3.1.1](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v3.1.0...v3.1.1) (2023-04-28)
+
+
+### Bug Fixes
+
+* upgrade @commitlint/config-conventional from 17.0.3 to 17.4.4 ([7d4ae3a](https://github.com/andyrooger/vs-compat-ts-plugin/commit/7d4ae3abda9d8a33defed1a5b448b97dfe961dc1))
+* upgrade husky from 8.0.1 to 8.0.3 ([6085a6b](https://github.com/andyrooger/vs-compat-ts-plugin/commit/6085a6be49d1749942bd9c7a0e729dd79604b117))
+
 # [3.1.0](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v3.0.0...v3.1.0) (2023-04-27)
 
 
