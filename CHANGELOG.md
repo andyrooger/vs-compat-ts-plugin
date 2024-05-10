@@ -1,3 +1,18 @@
+# [4.0.0](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v3.1.1...v4.0.0) (2024-05-10)
+
+
+### Bug Fixes
+
+* **node:** drop support for node 14 ([7e06217](https://github.com/andyrooger/vs-compat-ts-plugin/commit/7e0621730b1528188904219ea0bae2695f2d6a9b))
+
+
+### BREAKING CHANGES
+
+* **node:** Node 14.x is no longer supported
+
+Use a supported version of node. Node 18.x or higher is supported currently.
+Node 16.x and above is allowed too until it fails CI, but is unsupported.
+
 ## [3.1.1](https://github.com/andyrooger/vs-compat-ts-plugin/compare/v3.1.0...v3.1.1) (2023-04-28)
 
 
