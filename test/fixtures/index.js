@@ -23,6 +23,7 @@ module.exports = {
     },
     TS_VERSIONS: { 
         // Latest and oldest of each major release
+        '5.4': { version: '5.4.5', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript54') },
         '5.0': { version: '5.0.4', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript50') },
         '4.9': { version: '4.9.5', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript49') },
         '4.0': { version: '4.0.7', path: path.resolve(__dirname, 'workspace', 'node_modules', 'typescript40') },
