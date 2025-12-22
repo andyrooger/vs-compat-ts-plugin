@@ -16,6 +16,7 @@ pluginTest('should log but not warn if plugin cannot be found in the list', {
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses, assertHasMessageBy }) => {
+        responses = responses.filter(r => r.command === 'semanticDiagnosticsSync');
         assertHasMessageBy(THIS_PLUGIN.name, 'Could not find the plugin in the project plugin list');
         t.ok(responses[0].success);
         t.equal(responses[0].body.length, 0);
@@ -29,6 +30,7 @@ pluginTest('should warn when something precedes this plugin in plugins list', {
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses }) => {
+        responses = responses.filter(r => r.command === 'semanticDiagnosticsSync');
         t.ok(responses[0].success);
         t.equal(responses[0].body.length, 1);
         t.equal(responses[0].body[0].code, EXPECTED_ERROR_CODE);
@@ -42,6 +44,7 @@ pluginTest('should not warn when this plugin is first in plugins list', {
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses }) => {
+        responses = responses.filter(r => r.command === 'semanticDiagnosticsSync');
         t.ok(responses[0].success);
         t.equal(responses[0].body.length, 0);
     }
@@ -54,6 +57,7 @@ pluginTest('should not warn when found outside the normal plugins list', {
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses }) => {
+        responses = responses.filter(r => r.command === 'semanticDiagnosticsSync');
         t.ok(responses[0].success);
         t.equal(responses[0].body.length, 0);
     }
@@ -66,6 +70,7 @@ pluginTest('should mark error across the whole plugin def object in the source',
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses }) => {
+        responses = responses.filter(r => r.command === 'semanticDiagnosticsSync');
         t.ok(responses[0].success);
         t.equal(responses[0].body.length, 1);
         const response = responses[0].body[0];
@@ -83,6 +88,7 @@ pluginTest('should be warning with a sensible message', {
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses }) => {
+        responses = responses.filter(r => r.command === 'semanticDiagnosticsSync');
         t.ok(responses[0].success);
         t.equal(responses[0].body.length, 1);
         t.equal(responses[0].body[0].code, EXPECTED_ERROR_CODE);
@@ -98,6 +104,7 @@ pluginTest('should find the plugin by its package name', {
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses }) => {
+        responses = responses.filter(r => r.command === 'semanticDiagnosticsSync');
         t.ok(responses[0].success);
         t.equal(responses[0].body.length, 1);
         t.equal(responses[0].body[0].code, EXPECTED_ERROR_CODE);
@@ -110,6 +117,7 @@ pluginTest('should not find the plugin when it appears in another plugin name', 
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses }) => {
+        responses = responses.filter(r => r.command === 'semanticDiagnosticsSync');
         t.ok(responses[0].success);
         t.equal(responses[0].body.length, 0);
     }
@@ -122,6 +130,7 @@ pluginTest('should be ok with the plugin appearing twice if one comes first', {
     ],
     serverCommands: getTsConfigDiagnostics,
     check: (t, { responses }) => {
+        responses = responses.filter(r => r.command === 'semanticDiagnosticsSync');
         t.ok(responses[0].success);
         t.equal(responses[0].body.length, 0);
     }
