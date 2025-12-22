@@ -1,6 +1,6 @@
 {
   "name": "vs-compat-ts-plugin",
-  "version": "5.0.0",
+  "version": "0.0.0",
   "description": "TypeScript language service plugin to let more plugins work in Visual Studio.",
   "main": "index.js",
   "files": [
@@ -38,7 +38,6 @@
   "devDependencies": {
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
-    "@semantic-release/changelog": "^6.0.1",
     "@semantic-release/git": "^10.0.1",
     "husky": "^9.1.4",
     "semantic-release": "^25.0.2",
@@ -55,7 +54,6 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      "@semantic-release/changelog",
       "@semantic-release/npm",
       "@semantic-release/git",
       "@semantic-release/github"
