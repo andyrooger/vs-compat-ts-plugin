@@ -34,6 +34,11 @@ jobs:
 
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
 
     steps:
     - name: Checkout
@@ -46,8 +51,8 @@ jobs:
         node-version: '22'
         cache: npm
     - run: npm ci
+    - run: npm audit signatures
     - run: npm run semantic-release
       env:
         HUSKY: 0
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
