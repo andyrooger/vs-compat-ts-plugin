@@ -15,7 +15,10 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
     - name: Use Node.js ${{ matrix.node }}
       uses: actions/setup-node@v4
       with:
@@ -33,7 +36,10 @@ jobs:
     timeout-minutes: 20
 
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
     - name: Use Node.js 22
       uses: actions/setup-node@v4
       with:
