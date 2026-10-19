@@ -30,7 +30,7 @@ jobs:
     # This step only executes on the Node 22 runner
     - name: Upgrade npm on Node 22
       if: matrix.node == '22'
-      run: sudo npm install -g npm@11
+      run: npm install -g npm@11
     - run: npm ci --ignore-scripts
     - run: npm install --omit=dev --ignore-scripts
       working-directory: test/fixtures/workspace
