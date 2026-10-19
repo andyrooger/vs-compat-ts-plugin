@@ -7,7 +7,7 @@
     "src"
   ],
   "engines": {
-    "node": ">=18"
+    "node": ">=22"
   },
   "scripts": {
     "pretest": "cd test/fixtures/workspace && npm install --omit=dev --ignore-scripts && cd ../../..",
